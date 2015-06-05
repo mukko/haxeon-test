@@ -1,5 +1,5 @@
 <html>
-<head><title>受信画面</title></head>
+<head><title>サインアップ画面</title></head>
 <body>
 
 <?php
@@ -22,7 +22,7 @@
 	  exit();
 	}
 
-	$result = $db->query("INSERT INTO `haxeon`.`sample` (`ID`, `PASS`, `FAV`) VALUES ( '$id', '$pass', '21');");
+	$result = $db->query("INSERT INTO `haxeon`.`sample` (`ID`, `PASS`, `FAV`) VALUES ( '$id', '$pass', '.rand(1,100).');");
 	if($result){
 		print("seikou");
 	}

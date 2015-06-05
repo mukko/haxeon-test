@@ -11,10 +11,12 @@
 	<body>
 	<a href="login.html"><img src="img/sample.jpg" border="0"></a>
 	<a href="signup.html"><img src="img/sample2.jpg" border="0"></a><br>
+	<a href="logout.php"><img src="img/logout.jpg" border="0"></a><br>
 	<a href="http://localhost/try-haxe/index.html"><img src="img/sample3.jpg" border="10"></a><br>
 	<a href="createProject.html"><img src="img/createPro.jpg" border="10"></a><br>
 
 	<?php
+
 	$dbName = 'haxeon';
 	$user = 'root';
 	$password = 'w3whS2jS23';
@@ -25,7 +27,23 @@
 	  exit();
 	}
 
-	//UPDATE `project` SET `url`= 'avv' WHERE `pv` = 50000
+	if(!isset($_COOKIE["PHPSESSID"])){
+		?> <font size="7" color="red" face="HGP創英角ﾎﾟｯﾌﾟ体">
+		<marquee scrolldelay="20" scrollamount="50" width="500">
+		こんにちは、ゲストさん！！ 
+		</marquee> </font> <?php
+	} else {
+		echo '<marquee scrolldelay="20" scrollamount="100" width="500"> <font size="7" color="red" face="HGP創英角ﾎﾟｯﾌﾟ体">'."$_GET[account]".' さん、こんにちは！！</font></marquee></br>';
+		print('セッションIDは'.$_COOKIE["PHPSESSID"].'です。<br>');
+		$result =  $db->query("SELECT `userIcon` FROM `account` WHERE `userName` = \"$_GET[account]\"");
+		if($result){
+			while($row = $result->fetch_object()){
+				$icon = htmlspecialchars($row->userIcon);
+			}
+		}
+		echo '<img src='.$icon.' border="0">';
+	}
+
 	$result = $db->query("SELECT * FROM `PROJECT` ORDER BY `PV` DESC");
 	if($result){
 		$i = 1;

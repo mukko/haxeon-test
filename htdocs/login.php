@@ -32,6 +32,15 @@
 		}
 		if($userPass == $pass){
 			echo("<br>ログイン成功！！こんにちは $userName さん！");
+			session_start();
+
+			if(empty($_SESSION['count'])) {
+				$_SESSION['count'] = 1;
+			} else { 
+				$_SESSION['count']++;
+			}
+		//リダイレクト
+		header( "refresh:2; index.php?account=$userName" );
 		} else {
 			$text = '戻る';
 			echo("IDかパスワードが間違っています。");
@@ -45,6 +54,17 @@
 
 	$db->close();
 ?>
+
+<p>
+こんにちは、あなたがこのページに来たのは <?php echo $_SESSION['count']; ?> 回目ですね。
+</p>
+
+<p>
+//デバッグ用
+//続けるには、<a href="index.php?<?php echo htmlspecialchars(SID); ?>">ここをクリック</A>
+//してください。
+メインページに移動します...
+</p>
 
 </body>
 </html>
