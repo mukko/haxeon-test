@@ -27,6 +27,14 @@
 	$result = $db->query("INSERT INTO `haxeon`.`account` (`userID`, `userPass`, `userName`, `userIcon`, `userProfile`, `userURL`,`userMail`) VALUES ( '$id', '$pass', '$name', 'none' , '$profile', 'none', 'none');");
 	if($result){
 		print("seikou");
+		//ディレクトリを生成する処理を作る
+		$path = "../user/$id";
+		$project = "$path/project";
+		if(mkdir($path) && mkdir($project)){
+			echo("ユーザディレクトリ作成成功！");
+		}else{
+			echo("ユーザディレクトリ作成失敗！！");
+		}
 	}
 	else{
 		die('INSERTクエリーが失敗しました。'.mysql_error());
