@@ -9,9 +9,6 @@
 	へようこそ。<br><br>
 
 	<body>
-	<a href="login.html"><img src="img/sample.jpg" border="0"></a>
-	<a href="signup.html"><img src="img/sample2.jpg" border="0"></a><br>
-	<a href="logout.php"><img src="img/logout.jpg" border="0"></a><br>
 	<a href="http://localhost/try-haxe/index.html"><img src="img/sample3.jpg" border="10"></a><br>
 	<a href="createProject.html"><img src="img/createPro.jpg" border="10"></a><br>
 
@@ -29,11 +26,13 @@
 
 	if(!isset($_COOKIE["PHPSESSID"])){
 		?> <font size="7" color="red" face="HGP創英角ﾎﾟｯﾌﾟ体">
-		<marquee scrolldelay="20" scrollamount="50" width="500">
-		こんにちは、ゲストさん！！ 
-		</marquee> </font> <?php
+		こんにちは、ゲストさん！！ <br>
+		<a href="login.html"><img src="img/sample.jpg" border="0"></a>
+		<a href="signup.html"><img src="img/sample2.jpg" border="0"></a><br>
+		</font> <?php
 	} else {
-		echo '<marquee scrolldelay="20" scrollamount="100" width="500"> <font size="7" color="red" face="HGP創英角ﾎﾟｯﾌﾟ体">'."$_GET[account]".' さん、こんにちは！！</font></marquee></br>';
+		echo '<font size="7" color="red" face="HGP創英角ﾎﾟｯﾌﾟ体">'."$_GET[account]".' さん、こんにちは！！</font></br>';
+		echo '<a href="logout.php"><img src="img/logout.jpg" border="0"></a><br>';
 		print('セッションIDは'.$_COOKIE["PHPSESSID"].'です。<br>');
 		$result =  $db->query("SELECT `userIcon` FROM `account` WHERE `userName` = \"$_GET[account]\"");
 		if($result){

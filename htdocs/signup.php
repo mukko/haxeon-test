@@ -4,8 +4,10 @@
 
 <?php
 	header("Content-Type: text/html; charset=Shift-JIS");
-	$id = $_POST['id'];
-	$pass = $_POST['pass'];
+	$id = $_POST['userID'];
+	$pass = $_POST['userPass'];
+	$name = $_POST['userName'];
+	$profile = $_POST['userProfile'];
 
 	//デバッグ
 	print("受信したデータは <strong> $id - $pass </strong> です。<br/><br/>");
@@ -22,7 +24,7 @@
 	  exit();
 	}
 
-	$result = $db->query("INSERT INTO `haxeon`.`sample` (`ID`, `PASS`, `FAV`) VALUES ( '$id', '$pass', '.rand(1,100).');");
+	$result = $db->query("INSERT INTO `haxeon`.`account` (`userID`, `userPass`, `userName`, `userIcon`, `userProfile`, `userURL`,`userMail`) VALUES ( '$id', '$pass', '$name', 'none' , '$profile', 'none', 'none');");
 	if($result){
 		print("seikou");
 	}

@@ -8,19 +8,21 @@
 		アカウントを作成します。<br>
 		IDとパスワードを入力してください。
 		<form action="signup.php" method="post">
-			<table border="30">
-				<tr>
-					<td>ID</td>
-					<td><input type="text" name="id"></td>
-					<td>パスワード</td>
-					<td><input type="password" name="pass"></td>
-					<td>ハンネーム</td>
-					<td><input type="text" name="name"></td>
-					<td colspan="20" align="center">
-					<input type="submit" value="送信">
-					</td>
-				</tr>
-			</table>
+			<tr>ユーザーID<br>
+			<INPUT size="20" type="text" value="" name="userID"></INPUT><br></tr>
+			<tr>パスワード<br>
+			<INPUT size="20" type="password" value="" name="userPass"></INPUT><br></tr>
+			<tr>ハンネーム<br>
+			<INPUT size="20" type="text" value="" name="userName"></INPUT><br></tr>
+			<tr>アイコン<br>
+			<INPUT size="20" type="file" value="" name="userIcon"></INPUT><br></tr>
+			<tr>プロフィール<br>
+			<INPUT size="50" type="text" value="" name="userProfile"></INPUT><br></tr>
+			<tr>URL<br>
+			<INPUT size="30" type="url" value="" name="userURL"></INPUT><br></tr>
+			<tr>メールアドレス<br>
+			<INPUT size="30" type="email" value="" name="userMail"></INPUT><br></tr><br>
+			<tr><input type="submit" value="送信する"></tr>
 		</form>
 	</body>
 </html>
