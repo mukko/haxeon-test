@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100%;
+}
+
+#header {
+  width:100%;
+  height:77px;	/*背景画像のサイズに合わせてボックスの高さを指定*/
+	background-image:url("img/bg_header.jpg");	/*ヘッダ部分の背景画像*/
+	background-repeat:no-repeat;		/*背景画像を繰り返さない*/
+	background-color:#cccccc;		/*ヘッダ部分の背景色*/
+
+	-moz-background-size:100% auto;
+	background-size:100% auto;
+}
+
+#footer {
+	height:42px;
+  text-align:center;
+	clear:both;					/*回り込みを解除する*/
+	background-image:url("images/bg_footer.jpg");	/*フッタ部分の背景画像*/
+	background-repeat:no-repeat;			/*背景画像を繰り返さない*/
+	background-color:#cccccc;			/*フッタ部分の背景色*/
+}
+
+#container {
+  position: relative;
+}
+
+#profile:before {
+  display: table;
+  content: "";
+}
+
+#profile:after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+#my_column {
+  float: left;
+  width: 25%;
+  background-color: #d90232;
+}
+
+#my_contents {
+  float: left;
+  width: 75%;
+  background-color: #54af85;
+}
+
+#column {
+
+}
