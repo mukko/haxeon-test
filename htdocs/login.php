@@ -1,24 +1,23 @@
-<html>
-<head><title>ƒƒOƒCƒ“</title></head>
+ï»¿<html>
+<head><title>ãƒ­ã‚°ã‚¤ãƒ³</title></head>
 <body>
 
 <?php
-	header("Content-Type: text/html; charset=Shift-JIS");
+	header("Content-Type: text/html; charset=UTF-8");
 	$id = $_POST['id'];
 	$pass = $_POST['pass'];
+	
+	//print("å—ä¿¡ã—ãŸãƒ‡ãƒ¼ã‚¿ã¯ <strong> $id - $pass </strong> ã§ã™ã€‚<br/><br/>");	//ãƒ‡ãƒãƒƒã‚°	
 
-	//ƒfƒoƒbƒO
-	print("óM‚µ‚½ƒf[ƒ^‚Í <strong> $id - $pass </strong> ‚Å‚·B<br/><br/>");
-
-	//ƒf[ƒ^ƒx[ƒXÚ‘±ˆ—
+	//ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æ¥ç¶šå‡¦ç†
 	$dbName = 'haxeon';
 	$user = 'root';
 	$password = 'w3whS2jS23';
 
 	$db = new mysqli('localhost', $user ,$password, $dbName) or die("error");
-	//ƒf[ƒ^ƒx[ƒX‚Ö‚ÌÚ‘±‚ª¸”s‚µ‚½‚çƒGƒ‰[‚ğo—Í‚µ‚ÄI—¹
+	//ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã¸ã®æ¥ç¶šãŒå¤±æ•—ã—ãŸã‚‰ã‚¨ãƒ©ãƒ¼ã‚’å‡ºåŠ›ã—ã¦çµ‚äº†
 	if ($db->connect_error){
-	  print("Ú‘±¸”sF" . $db->connect_error . "<br>");
+	  print("æ¥ç¶šå¤±æ•—ï¼š" . $db->connect_error . "<br>");
 	  exit();
 	}
 
@@ -28,10 +27,10 @@
 			$userID   = htmlspecialchars($row->userID);
 			$userPass = htmlspecialchars($row->userPass);
 			$userName = htmlspecialchars($row->userName);
-			echo("$userID | $userPass | $userName <br>");	//ƒfƒoƒbƒO
+			//echo("$userID | $userPass | $userName <br>");	//ãƒ‡ãƒãƒƒã‚°
 		}
 		if($userPass == $pass){
-			echo("<br>ƒƒOƒCƒ“¬Œ÷II‚±‚ñ‚É‚¿‚Í $userName ‚³‚ñI");
+			echo("<br>ãƒ­ã‚°ã‚¤ãƒ³æˆåŠŸï¼ï¼ã“ã‚“ã«ã¡ã¯ $userName ã•ã‚“ï¼<br> ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã—ã¾ã™...");
 			session_start();
 
 			if(empty($_SESSION['count'])) {
@@ -39,32 +38,21 @@
 			} else { 
 				$_SESSION['count']++;
 			}
-		//ƒŠƒ_ƒCƒŒƒNƒg
-		header( "refresh:2; index.php?account=$userName" );
+		//ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆ
+		header( "refresh:3; index.php?account=$userName" );
 		} else {
-			$text = '–ß‚é';
-			echo("ID‚©ƒpƒXƒ[ƒh‚ªŠÔˆá‚Á‚Ä‚¢‚Ü‚·B");
+			$text = 'æˆ»ã‚‹';
+			echo("IDã‹ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒé–“é•ã£ã¦ã„ã¾ã™ã€‚");
 			echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">' . $text . "</a>";
 		}
 	}
 	else {
-		echo("ID‚©ƒpƒXƒ[ƒh‚ªŠÔˆá‚Á‚Ä‚¢‚Ü‚·B");
+		echo("IDã‹ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒé–“é•ã£ã¦ã„ã¾ã™ã€‚");
 		echo '<a href="' . $_SERVER['HTTP_REFERER'] . '">' . $text . "</a>";
 	}
 
 	$db->close();
 ?>
-
-<p>
-‚±‚ñ‚É‚¿‚ÍA‚ ‚È‚½‚ª‚±‚Ìƒy[ƒW‚É—ˆ‚½‚Ì‚Í <?php echo $_SESSION['count']; ?> ‰ñ–Ú‚Å‚·‚ËB
-</p>
-
-<p>
-//ƒfƒoƒbƒO—p
-//‘±‚¯‚é‚É‚ÍA<a href="index.php?<?php echo htmlspecialchars(SID); ?>">‚±‚±‚ğƒNƒŠƒbƒN</A>
-//‚µ‚Ä‚­‚¾‚³‚¢B
-ƒƒCƒ“ƒy[ƒW‚ÉˆÚ“®‚µ‚Ü‚·...
-</p>
 
 </body>
 </html>
