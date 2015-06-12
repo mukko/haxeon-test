@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-	<head>	
+	<head>
 	<meta charset="UTF-8" />
-	<title>HAXEON</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<title>Haxe on!</title>
 	</head>
 
-	<img src="img/title.jpg" width="500" height="200" alt=""> <br>
-	へようこそ。<br><br>
-
 	<body>
-	<a href="http://localhost/try-haxe/index.html"><img src="img/sample3.jpg" border="10"></a><br>
-	<a href="createProject.html"><img src="img/createPro.jpg" border="10"></a><br>
+	<font face="ヒラギノ角ゴ Pro W3","メイリオ">
+	<!-- ヘッダー -->
+	<div id="header"><h1>Haxe On!</h1></div>
 
+	<div class="menu">
+          
 	<?php
-
 	$dbName = 'haxeon';
 	$user = 'root';
 	$password = 'w3whS2jS23';
@@ -23,26 +23,73 @@
 	  print("connection error" . $db->connect_error . "<br>");
 	  exit();
 	}
-
+	
+	//未ログイン時はログインとサインアップを表示
 	if(!isset($_COOKIE["PHPSESSID"])){
-		?> <font size="7" color="red" face="HGP創英角ﾎﾟｯﾌﾟ体">
-		こんにちは、ゲストさん！！ <br>
-		<a href="login.html"><img src="img/sample.jpg" border="0"></a>
-		<a href="signup.html"><img src="img/sample2.jpg" border="0"></a><br>
-		</font> <?php
+	?> 
+	<ul>
+		<li><a href="http://localhost/haxeon/login.html">Login</a>
+			<ul>                    
+				<li><a href="http://localhost/haxeon/signup.html">Signup</a></li>
+			</ul>
+		</li>
+	<?php
+	//ログイン時はアカウント名とアカウントサービスを表示
 	} else {
-		echo '<font size="7" color="red" face="HGP創英角ﾎﾟｯﾌﾟ体">'."$_GET[account]".' さん、こんにちは！！</font></br>';
-		echo '<a href="logout.php"><img src="img/logout.jpg" border="0"></a><br>';
-		print('セッションIDは'.$_COOKIE["PHPSESSID"].'です。<br>');
+		//print('セッションIDは'.$_COOKIE["PHPSESSID"].'です。<br>');	//デバッグ
+		//ユーザー名からアイコンを取得
 		$result =  $db->query("SELECT `userIcon` FROM `account` WHERE `userName` = \"$_GET[account]\"");
 		if($result){
 			while($row = $result->fetch_object()){
 				$icon = htmlspecialchars($row->userIcon);
 			}
 		}
-		echo '<img src='.$icon.' border="0">';
-	}
+	?>
+	<ul>
+		<li><h3>Hello, <img src="<?php echo $icon?>" width=10% height=10%> <?php echo "$_GET[account]"?></h3>
+			<ul>                    
+				<li><a href="#">Posted Codes</a></li>
+				<li><a href="#">Favorite Codes</a></li>
+				<li><a href="#">Followers</a></li>
+				<li><a href="http://localhost/haxeon/logout.php">Logout</a></li>
+			</ul>
+		</li>
+	<?php } ?>
+		<li>Ranking
+			<ul>
+				<li><a href="#">Page View Ranking</a></li>
+				<li><a href="#">Favorite Ranking</a></li>
+				<li><a href="#">Forked Count Ranking</a></li>
+			</ul>
+		</li>
+		
+		<li>Create Code
+			<ul>
+				<li><a href="http://localhost/try-haxe/index.html">Try-haxe</a></li>
+				<li><a href="http://localhost/haxeon/createProject.html">Create Project</a></li>
+			</ul>
+		</li>
+		
+		<li>Q&A
+			<ul>
+				<li><a href="#">New Question</a></li>
+				<li><a href="#">Hot Questions</a></li>
+			</ul>
+		</li>
 
+		<li>About Haxe
+			<ul>
+				<li><a href="http://api.haxe.org/">Api</a></li>
+				<li><a href="https://github.com/HaxeFoundation/haxe">Github</a></li>
+				<li><a href="http://sipo.jp/blog/2014/01/25.html">enumのすごさ</a></li>
+			</ul>
+		</li>
+		
+		</ul>
+	</div>
+	
+	<?php
+	//ホットコードを表示
 	$result = $db->query("SELECT * FROM `PROJECT` ORDER BY `PV` DESC");
 	if($result){
 		$i = 1;
@@ -63,9 +110,11 @@
 	}
 
 	$db->close();
-
 	?>
-
-	<br><br><font size="10"><a href="http://haxe.org/" target="_blank"> What's HAXE </a></font><br>
+	
+	<!-- フッター -->
+	<br/><br/>
+	<div id="footer"><address>Copyright (c) シテイル All Rights Reserved.</address></div>
+	</font>
 	</body>
 </html>
