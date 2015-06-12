@@ -37,14 +37,10 @@
       	} else {
       		//print('セッションIDは'.$_COOKIE["PHPSESSID"].'です。<br>');	//デバッグ
       		//ユーザー名からアイコンを取得
-      		$result =  $db->query("SELECT * FROM `account` WHERE `userName` = \"$_GET[account]\"");
+      		$result =  $db->query("SELECT `userIcon` FROM `account` WHERE `userName` = \"$_GET[account]\"");
       		if($result){
       			while($row = $result->fetch_object()){
       				$icon = htmlspecialchars($row->userIcon);
-              $name = htmlspecialchars($row->userName);
-              $profile = htmlspecialchars($row->userProfile);
-              $url = htmlspecialchars($row->userURL);
-              $mail = htmlspecialchars($row->userMail);
       			}
       		}
       	?>
@@ -97,26 +93,14 @@
           <div id="my_column">
             <div id="column">
               <h1>profile</h1>
-              <img src="<?php echo $icon?>" width=200px height=200px>
-              <h2><?php echo $name ?></h2>
-              <br style="color:whilte;">
-              <?php
-              //userURLがあったら表示
-              if($url != "none") echo "<p>URL: $url</p>";
-
-              //userMailがあったら表示
-              if($mail != "none") echo "<p>Mail: $mail</p>";
-
-              if($profile != "none") echo "<p>Profile $profile</p>";
-               ?>
+              flkjdoi;weanoae
             </div>
           </div>
           <!-- コンテンツ -->
           <div id="my_contents">
             <div id="contents">
-              <h1>aaaaaaaa</h1>
-              <p>fjeklw;ajfwoeai;fgnwaogtaw;oitgo</p>
-              <p>eok;jfoweanf</p>
+              <h1>コードとかの形式が決まったら表示するようにする</h1>
+              質問とかも
             </div>
           </div>
           <?php
