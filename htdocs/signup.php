@@ -1,43 +1,43 @@
-<html>
-<head><title>ƒTƒCƒ“ƒAƒbƒv‰æ–Ê</title></head>
+ï»¿<html>
+<head><title>ã‚µã‚¤ãƒ³ã‚¢ãƒƒãƒ—ç”»é¢</title></head>
 <body>
 
 <?php
-	header("Content-Type: text/html; charset=Shift-JIS");
+	header("Content-Type: text/html; charset=UTF-8");
 	$id = $_POST['userID'];
 	$pass = $_POST['userPass'];
 	$name = $_POST['userName'];
 	$profile = $_POST['userProfile'];
 
-	//ƒfƒoƒbƒO
-	print("óM‚µ‚½ƒf[ƒ^‚Í <strong> $id - $pass </strong> ‚Å‚·B<br/><br/>");
+	//ãƒ‡ãƒãƒƒã‚°
+	print("å—ä¿¡ã—ãŸãƒ‡ãƒ¼ã‚¿ã¯ <strong> $id - $pass </strong> ã§ã™ã€‚<br/><br/>");
 
-	//ƒf[ƒ^ƒx[ƒXÚ‘±ˆ—
+	//ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æ¥ç¶šå‡¦ç†
 	$dbName = 'haxeon';
 	$user = 'root';
 	$password = 'w3whS2jS23';
 
 	$db = new mysqli('localhost', $user ,$password, $dbName) or die("error");
-	//ƒf[ƒ^ƒx[ƒX‚Ö‚ÌÚ‘±‚ª¸”s‚µ‚½‚çƒGƒ‰[‚ğo—Í‚µ‚ÄI—¹
+	//ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã¸ã®æ¥ç¶šãŒå¤±æ•—ã—ãŸã‚‰ã‚¨ãƒ©ãƒ¼ã‚’å‡ºåŠ›ã—ã¦çµ‚äº†
 	if ($db->connect_error){
-	  print("Ú‘±¸”sF" . $db->connect_error . "<br>");
+	  print("æ¥ç¶šå¤±æ•—ï¼š" . $db->connect_error . "<br>");
 	  exit();
 	}
 
 	$result = $db->query("INSERT INTO `haxeon`.`account` (`userID`, `userPass`, `userName`, `userIcon`, `userProfile`, `userURL`,`userMail`) VALUES ( '$id', '$pass', '$name', 'none' , '$profile', 'none', 'none');");
 	if($result){
 		print("seikou");
-		//ƒfƒBƒŒƒNƒgƒŠ‚ğ¶¬‚·‚éˆ—‚ğì‚é
+		//ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ç”Ÿæˆã™ã‚‹å‡¦ç†ã‚’ä½œã‚‹
 		$path = "../user/$id";
 		$project = "$path/project";
 		if(mkdir($path) && mkdir($project)){
-			echo("ƒ†[ƒUƒfƒBƒŒƒNƒgƒŠì¬¬Œ÷I");
+			echo("ãƒ¦ãƒ¼ã‚¶ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªä½œæˆæˆåŠŸï¼");
 		}else{
-			echo("ƒ†[ƒUƒfƒBƒŒƒNƒgƒŠì¬¸”sII");
+			echo("ãƒ¦ãƒ¼ã‚¶ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªä½œæˆå¤±æ•—ï¼ï¼");
 		}
 	}
 	else{
-		die('INSERTƒNƒGƒŠ[‚ª¸”s‚µ‚Ü‚µ‚½B'.mysql_error());
+		die('INSERTã‚¯ã‚¨ãƒªãƒ¼ãŒå¤±æ•—ã—ã¾ã—ãŸã€‚'.mysql_error());
 	}
 
 
