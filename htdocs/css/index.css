@@ -8,7 +8,7 @@
 	line-height:1.5;	/*全要素の行の高さを1.5倍にする*/
 	color:#333333;		/*文字色*/
 
-} 
+}
 body {
 	background-color:#999999;	/*ページ全体の背景色*/
 	text-align:center;		/*IE6以下でセンタリングするための対策*/
@@ -38,6 +38,17 @@ div#header {
 	width:100%;
 	-moz-background-size:100% auto;
 	background-size:100% auto;
+}
+
+.menu:before {
+  display: table;
+  content: "";
+}
+
+.menu:after {
+  display: table;
+  clear: both;
+  content: "";
 }
 
 .menu ul{
