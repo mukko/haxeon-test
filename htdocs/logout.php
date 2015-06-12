@@ -1,34 +1,34 @@
-<html>
-<head><title>ƒƒOƒAƒEƒg</title></head>
-<body>
+ï»¿<html>
+	<head><title>ãƒ­ã‚°ã‚¢ã‚¦ãƒˆ</title></head>
 
-<?php
+	<body>
 
-header("Content-Type: text/html; charset=Shift-JIS");
-// ƒZƒbƒVƒ‡ƒ“‚Ì‰Šú‰»
-// session_name("something")‚ğg—p‚µ‚Ä‚¢‚éê‡‚Í“Á‚É‚±‚ê‚ğ–Y‚ê‚È‚¢‚æ‚¤‚É!
-session_start();
+	<?php
 
-// ƒZƒbƒVƒ‡ƒ“•Ï”‚ğ‘S‚Ä‰ğœ‚·‚é
-$_SESSION = array();
+	header("Content-Type: text/html; charset=UTF-8");
+	// ã‚»ãƒƒã‚·ãƒ§ãƒ³ã®åˆæœŸåŒ–
+	// session_name("something")ã‚’ä½¿ç”¨ã—ã¦ã„ã‚‹å ´åˆã¯ç‰¹ã«ã“ã‚Œã‚’å¿˜ã‚Œãªã„ã‚ˆã†ã«!
+	session_start();
 
-// ƒZƒbƒVƒ‡ƒ“‚ğØ’f‚·‚é‚É‚ÍƒZƒbƒVƒ‡ƒ“ƒNƒbƒL[‚àíœ‚·‚éB
-// Note: ƒZƒbƒVƒ‡ƒ“î•ñ‚¾‚¯‚Å‚È‚­ƒZƒbƒVƒ‡ƒ“‚ğ”j‰ó‚·‚éB
-if (ini_get("session.use_cookies")) {
-    $params = session_get_cookie_params();
-    setcookie(session_name(), '', time() - 42000,
-        $params["path"], $params["domain"],
-        $params["secure"], $params["httponly"]
-    );
-}
+	// ã‚»ãƒƒã‚·ãƒ§ãƒ³å¤‰æ•°ã‚’å…¨ã¦è§£é™¤ã™ã‚‹
+	$_SESSION = array();
 
-// ÅI“I‚ÉAƒZƒbƒVƒ‡ƒ“‚ğ”j‰ó‚·‚é
-session_destroy();
-?>
+	// ã‚»ãƒƒã‚·ãƒ§ãƒ³ã‚’åˆ‡æ–­ã™ã‚‹ã«ã¯ã‚»ãƒƒã‚·ãƒ§ãƒ³ã‚¯ãƒƒã‚­ãƒ¼ã‚‚å‰Šé™¤ã™ã‚‹ã€‚
+	// Note: ã‚»ãƒƒã‚·ãƒ§ãƒ³æƒ…å ±ã ã‘ã§ãªãã‚»ãƒƒã‚·ãƒ§ãƒ³ã‚’ç ´å£Šã™ã‚‹ã€‚
+	if (ini_get("session.use_cookies")) {
+		$params = session_get_cookie_params();
+		setcookie(session_name(), '', time() - 42000,
+			$params["path"], $params["domain"],
+			$params["secure"], $params["httponly"]
+		);
+	}
 
-ƒƒOƒAƒEƒg‚µ‚Ü‚·...
-<meta http-equiv="refresh" content="2;URL=http://localhost/haxeon/index.php">
+	// æœ€çµ‚çš„ã«ã€ã‚»ãƒƒã‚·ãƒ§ãƒ³ã‚’ç ´å£Šã™ã‚‹
+	session_destroy();
+	?>
 
-</body>
+	ãƒ­ã‚°ã‚¢ã‚¦ãƒˆã—ã¾ã™...
+	<meta http-equiv="refresh" content="2;URL=http://localhost/haxeon/index.php">
 
+	</body>
 </html>
