@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100%;
+}
+
+/*#header {*/
+  /*width:100%;*/
+  /*height:77px;	/*背景画像のサイズに合わせてボックスの高さを指定*/*/
+	/*background-image:url("img/bg_header.jpg");	/*ヘッダ部分の背景画像*/*/
+	/*background-repeat:no-repeat;		/*背景画像を繰り返さない*/*/
+	/*background-color:#cccccc;		/*ヘッダ部分の背景色*/*/
+
+	/*-moz-background-size:100% auto;*/
+	/*background-size:100% auto;*/
+/*}*/
+
+.menu ul{
+  margin:0;
+  padding:0;
+}
+.menu ul li {
+  list-style: none;
+  margin:0;
+  padding:0;
+  font-size:100%;
+  float: left;
+  position: relative;
+  width: 20%;/*親メニューの幅*/
+  height: 40px;/*親メニューの高さ*/
+  line-height: 40px;
+  background:#FF9933;/*親メニューの背景色*/
+  color: #4D4D4D;/*親メニューの文字色*/
+  text-align:center;
+  font-weight:bold;
+}
+.menu ul li a {
+  color: #4D4D4D;
+  display: block;
+  text-decoration: none;
+}
+.menu ul li:hover, .menu ul li a:hover {
+  background:#FFCC66;/*ホバー時の親メニューの背景色*/
+  color:#fff;/*ホバー時の親メニューの文字色*/
+}
+.menu ul li ul {
+  position: absolute;
+  top: 40px;/*親メニューの高さと同じにする*/
+  width: 100%;
+  z-index: 100;
+}
+.menu ul li ul li {
+  visibility: hidden;
+  overflow: hidden;
+  width: 100%;/*サブメニューの幅*/
+  height: 0;
+  background:#FFCC33;/*サブメニューの背景色*/
+}
+.menu ul li ul li:hover, .menu ul li ul li a:hover {
+  background:#FF6633;/*ホバー時のサブメニューの背景色*/
+}
+.menu ul li:hover ul li, .menu ul li a:hover ul li{
+  visibility: visible;
+  overflow: visible;
+  height:40px;/*サブメニューの高さ*/
+  z-index: 10;
+}
+.menu * {
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+#footer {
+	height:42px;
+  text-align:center;
+	clear:both;					/*回り込みを解除する*/
+	background-image:url("images/bg_footer.jpg");	/*フッタ部分の背景画像*/
+	background-repeat:no-repeat;			/*背景画像を繰り返さない*/
+	background-color:#cccccc;			/*フッタ部分の背景色*/
+}
+
+#container {
+  position: relative;
+}
+
+#profile:before {
+  display: table;
+  content: "";
+}
+
+#profile:after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+#my_column {
+  float: left;
+  width: 25%;
+  background-color: #ee498e;
+}
+
+#my_contents {
+  float: left;
+  width: 75%;
+  background-color: #54af85;
+}
+
+#column {
+
+}
