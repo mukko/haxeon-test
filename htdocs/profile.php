@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
 <head>
   <meta charset="UTF-8" />
@@ -97,10 +98,17 @@
           <div id="my_column">
             <div id="column">
               <h1>profile</h1>
-              <img src="<?php echo $icon?>" width=200px height=200px>
+              <!-- <img src="<?php echo $icon?>" width=200px height=200px>
               <h2><?php echo $name ?></h2>
-              <br style="color:whilte;">
+              <br style="color:whilte;"> -->
               <?php
+              echo "<div style='text-align:center;'>";
+              if($icon == "none") echo "<img src='../assets/image/empty_thumbnail.png' width=200px height=200px>";
+              else echo "<img src=$icon width=200px height=200px>";
+              echo "</div>";
+
+              echo "<h2>$name</h2>";
+
               //userURLがあったら表示
               if($url != "none") echo "<p>URL: $url</p>";
 
