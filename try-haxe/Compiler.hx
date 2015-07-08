@@ -334,6 +334,11 @@ class Compiler {
 			}
 		}
 		
+		//追加部分
+		var userID = "user1";				//この2つの情報がクライアントから渡される
+		var projectName = "HelloWorld";
+		var UNKNOWN_USERNAME = "__unknown__";
+		
 		//データベース処理追加
 		if (out.exitCode == 0) {
 			var cnx = Mysql.connect( {
@@ -345,10 +350,35 @@ class Compiler {
 				socket : null
 			}
 			);
-			var pv = Math.random();
-			cnx.request("INSERT INTO `project`(`projectID`, `ownerUserID`, `pv`, `url`) VALUES (\""+program.uid+"\",\"try-haxe\","+pv*pv+",\"http://localhost/try-haxe/index.html#"+program.uid+"\")");
+			
+			//ユーザ名とプロジェクト名からプロジェクトIDを検索
+			var rset = cnx.request("SELECT projectID FROM project where ownerUserID = '" + userID + "' AND projectName = '" + projectName+"';");
+			
+			//長さが0ならプロジェクト所持者ではないと判定し、新規プロジェクト作成
+			if (rset.length == 0) {
+				html.body.push("<br><H3>プロジェクトIDなし</H3>");
+				
+				//プロジェクトIDの重複を確認
+				var rset2 = cnx.request("SELECT projectID FROM project where projectID = \"" + program.uid + "\";");
+				//重複無しならデータベースに登録
+				if (rset2.length == 0) {
+					cnx.request("INSERT INTO `project`(`projectID`, `projectName` ,`ownerUserID`, `pv`, `url`) VALUES (\""+program.uid+"\", \"sampleProject\",\""+UNKNOWN_USERNAME+"\","+10+",\"http://localhost/try-haxe/index.html#"+program.uid+"\")");
+					html.body.push("<br><H3>データベースにIDを登録しました。</H3>");
+				}
+			}
+			//長さが1ならプロジェクトIDを更新
+			else {
+				html.body.push("<br><H3>プロジェクトIDあり</H3>");
+				for (row in rset) {
+					html.body.push("プロジェクトID : "+row.projectID+" , 所有者 : "+userID+" , プロジェクト名 : "+projectName);
+				}
+				cnx.request("UPDATE project SET projectID = \""+program.uid+"\", url = \"http://localhost/try-haxe/index.html#"+program.uid+"\" WHERE ownerUserID = '" + userID + "' AND projectName = '" + projectName+"';");
+			}
+			
 			cnx.close();
 		}
+		
+		//追加部分終了
 		
 		if (out.exitCode == 0)
 		{
