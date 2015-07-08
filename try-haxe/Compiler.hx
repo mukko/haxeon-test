@@ -1,5 +1,7 @@
 package api;
 
+import haxe.Http;
+
 #if php
 import api.Completion.CompletionResult;
 import api.Completion.CompletionType;
@@ -28,6 +30,11 @@ class Compiler {
 
 	var tmpDir : String;
 	var mainFile : String;
+	
+	
+	//追加箇所
+	private var tmpResult : Dynamic;
+	
 	public static var haxePath = "C:/HaxeToolkit/haxe/haxe.exe";
 
 	public function new(){}
@@ -335,8 +342,16 @@ class Compiler {
 		}
 		
 		//追加部分
-		var userID = "user1";				//この2つの情報がクライアントから渡される
-		var projectName = "HelloWorld";
+		var con = new Http("http://localhost/haxeon/userinfo.php");
+		con.onError = onError;
+		con.onData = onResult;
+		
+		con.request(false);	
+		
+		html.body.push("<br><H3>"+this.tmpResult+"</H3>");
+		
+		var userID = "user3";				//この2つの情報がクライアントから渡される
+		var projectName = "HelloWorld2";
 		var UNKNOWN_USERNAME = "__unknown__";
 		
 		//データベース処理追加
@@ -362,7 +377,7 @@ class Compiler {
 				var rset2 = cnx.request("SELECT projectID FROM project where projectID = \"" + program.uid + "\";");
 				//重複無しならデータベースに登録
 				if (rset2.length == 0) {
-					cnx.request("INSERT INTO `project`(`projectID`, `projectName` ,`ownerUserID`, `pv`, `url`) VALUES (\""+program.uid+"\", \"sampleProject\",\""+UNKNOWN_USERNAME+"\","+10+",\"http://localhost/try-haxe/index.html#"+program.uid+"\")");
+					cnx.request("INSERT INTO `project`(`projectID`, `projectName` ,`ownerUserID`, `pv`, `url`) VALUES (\""+program.uid+"\", \"sampleProject\",\""+UNKNOWN_USERNAME+"\","+10+",\"http://localhost/haxeon/try-haxe/index.html#"+program.uid+"\")");
 					html.body.push("<br><H3>データベースにIDを登録しました。</H3>");
 				}
 			}
@@ -372,7 +387,7 @@ class Compiler {
 				for (row in rset) {
 					html.body.push("プロジェクトID : "+row.projectID+" , 所有者 : "+userID+" , プロジェクト名 : "+projectName);
 				}
-				cnx.request("UPDATE project SET projectID = \""+program.uid+"\", url = \"http://localhost/try-haxe/index.html#"+program.uid+"\" WHERE ownerUserID = '" + userID + "' AND projectName = '" + projectName+"';");
+				cnx.request("UPDATE project SET projectID = \""+program.uid+"\", url = \"http://localhost/haxeon/try-haxe/index.html#"+program.uid+"\" WHERE ownerUserID = '" + userID + "' AND projectName = '" + projectName+"';");
 			}
 			
 			cnx.close();
@@ -405,6 +420,19 @@ class Compiler {
 		return output;
 	}
 
+		//接続エラーの場合
+		private function onError(msg : String) : Void {
+			//var html:HTMLConf = {head:[], body:[]};
+			//trace("<br><H3>エラーです。</H3>"+msg);
+			this.tmpResult = msg;
+		}
+		//接続成功の場合
+		private function onResult(data : String):Void {
+			//var html:HTMLConf = { head:[], body:[] };
+			//trace("<br><H3>成功です！！。</H3>"+data);
+			this.tmpResult = "接続成功"+data;
+		}
+	
 	function runHaxe( args : Array<String> ){
 		
 		var proc = new sys.io.Process( haxePath , args );
