@@ -38,9 +38,11 @@
       	} else {
       		//print('セッションIDは'.$_COOKIE["PHPSESSID"].'です。<br>');	//デバッグ
       		//ユーザー名からアイコンを取得
-      		$result =  $db->query("SELECT * FROM `account` WHERE `userName` = \"$_GET[account]\"");
+      		$result =  $db->query("SELECT * FROM `account` WHERE `userID` = \"$_GET[id]\"");
       		if($result){
       			while($row = $result->fetch_object()){
+              //URLに表示するのはuserIDでよいのでは？
+              $id = htmlspecialchars($row->userID);
       				$icon = htmlspecialchars($row->userIcon);
               $name = htmlspecialchars($row->userName);
               $profile = htmlspecialchars($row->userProfile);
@@ -48,9 +50,20 @@
               $mail = htmlspecialchars($row->userMail);
       			}
       		}
+
+          $sql = "SELECT COUNT(*) as cnt FROM follow WHERE userFollowingID = $id";
+          $follow = 0;
+          if($result = $db->query($sql)){
+          while($row = $result->mysqli_fetch_assoc()){
+            $follow = $row['cnt'];
+          }
+        }
+          echo("<h3>$follow</h3><br >");
+
+          $followed = $db->query("SELECT COUNT(*) FROM `follow` WHERE `userFollowingID` = $id");
       	?>
       	<ul>
-      		<li><h3>Hello, <img src="<?php echo $icon?>" width=10% height=10%> <?php echo "$_GET[account]"?></h3>
+      		<li><h3>Hello, <img src="<?php echo $icon?>" width=10% height=10%> <?php echo "$_GET[id]"?></h3>
       			<ul>
       				<li><a href="#">Posted Codes</a></li>
       				<li><a href="#">Favorite Codes</a></li>
@@ -98,15 +111,12 @@
           <div id="my_column">
             <div id="column">
               <h1>profile</h1>
-              <!-- <img src="<?php echo $icon?>" width=200px height=200px>
-              <h2><?php echo $name ?></h2>
-              <br style="color:whilte;"> -->
               <?php
               echo "<div style='text-align:center;'>";
               if($icon == "none") echo "<img src='../assets/image/empty_thumbnail.png' width=200px height=200px>";
               else echo "<img src=$icon width=200px height=200px>";
               echo "</div>";
-
+              echo "<p>$id</p>";
               echo "<h2>$name</h2>";
 
               //userURLがあったら表示
@@ -116,6 +126,8 @@
               if($mail != "none") echo "<p>Mail: $mail</p>";
 
               if($profile != "none") echo "<p>Profile $profile</p>";
+
+              echo "<h1>$follow</h1>";
                ?>
             </div>
           </div>

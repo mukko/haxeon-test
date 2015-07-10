@@ -7,30 +7,30 @@
 	</head>
 
 	<body>
-	<font face="ヒラギノ角ゴ Pro W3","メイリオ">
+	<font face="HGP創英角ﾎﾟｯﾌﾟ体","ヒラギノ角ゴ Pro W3","メイリオ">
 	<!-- ヘッダー -->
 	<div id="header"><h1>Haxe On!</h1></div>
 
 	<div class="menu">
-          
+
 	<?php
 	$dbName = 'haxeon';
 	$user = 'root';
-	$password = 'w3whS2jS23';
+	$password = 'koji';
 
 	$db = new mysqli('localhost', $user ,$password, $dbName) or die("error");
 	if ($db->connect_error){
 	  print("connection error" . $db->connect_error . "<br>");
 	  exit();
 	}
-	
+
 	//未ログイン時はログインとサインアップを表示
 	if(!isset($_COOKIE["PHPSESSID"])){
-	?> 
+	?>
 	<ul>
-		<li><a href="http://localhost/haxeon/login.html">Login</a>
-			<ul>                    
-				<li><a href="http://localhost/haxeon/signup.html">Signup</a></li>
+		<li><a href="http://localhost/haxeon_first/htdocs/login.html">Login</a>
+			<ul>
+				<li><a href="http://localhost/haxeon_first/htdocs/signup.html">Signup</a></li>
 			</ul>
 		</li>
 	<?php
@@ -42,16 +42,18 @@
 		if($result){
 			while($row = $result->fetch_object()){
 				$icon = htmlspecialchars($row->userIcon);
+				$id = htmlspecialchars($row->userID);
 			}
 		}
 	?>
 	<ul>
-		<li><h3>Hello, <img src="<?php echo $icon?>" width=10% height=10%> <?php echo "$_GET[account]"?></h3>
-			<ul>                    
+		<!-- ログインユーザーのプロフィールページに飛べない -->
+		<li><?php echo("<a href=http://localhost/haxeon_fiest/htdocs/profile.php?id=$id>");?><h3>Hello, <img src="<?php echo $icon?>" width=10% height=10%> <?php echo "$_GET[account]"?></a></h3>
+			<ul>
 				<li><a href="#">Posted Codes</a></li>
 				<li><a href="#">Favorite Codes</a></li>
 				<li><a href="#">Followers</a></li>
-				<li><a href="http://localhost/haxeon/logout.php">Logout</a></li>
+				<li><a href="http://localhost/haxeon_first/htdocs/logout.php">Logout</a></li>
 			</ul>
 		</li>
 	<?php } ?>
@@ -62,14 +64,14 @@
 				<li><a href="#">Forked Count Ranking</a></li>
 			</ul>
 		</li>
-		
+
 		<li>Create Code
 			<ul>
-				<li><a href="http://localhost/try-haxe/index.html">Try-haxe</a></li>
+				<li><a href="http://localhost/haxeon_first/try-haxe/index.html">Try-haxe</a></li>
 				<li><a href="http://localhost/haxeon/createProject.html">Create Project</a></li>
 			</ul>
 		</li>
-		
+
 		<li>Q&A
 			<ul>
 				<li><a href="#">New Question</a></li>
@@ -84,10 +86,10 @@
 				<li><a href="http://sipo.jp/blog/2014/01/25.html">enumのすごさ</a></li>
 			</ul>
 		</li>
-		
+
 		</ul>
 	</div>
-	
+
 	<?php
 	//ホットコードを表示
 	$result = $db->query("SELECT * FROM `PROJECT` ORDER BY `PV` DESC");
@@ -104,14 +106,15 @@
 
 			//後で出力を整える
 			echo "第 $i 位 <a href=$url > $proID   </a>";
-			echo("| $userID | $pv PV!!! <br> ");
+			echo("|<a href=http://localhost/haxeon_first/htdocs/profile.php?id=$userID>$userID</a>");
+			echo("| $pv PV!!! <br> ");
 			$i++;
 		}
 	}
 
 	$db->close();
 	?>
-	
+
 	<!-- フッター -->
 	<br/><br/>
 	<div id="footer"><address>Copyright (c) シテイル All Rights Reserved.</address></div>
