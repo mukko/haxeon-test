@@ -116,5 +116,11 @@ echo("<h3>$name</h3><br >");
  ?>
 <!-- フォローリストおわり -->
 <?php $db->close(); ?>
+
+<!-- フッター -->
+<br/><br/>
+<div id="footer"><address>Copyright (c) シテイル All Rights Reserved.</address></div>
+</font>
+</body>
 </body>
 </html>
