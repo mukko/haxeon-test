@@ -104,15 +104,16 @@ $sql = "SELECT userID, userName, userIcon FROM account WHERE userID IN( SELECT u
 $result = $db->query($sql);
 if($result){
   while($row = $result->fetch_object()){
-    //URLに表示するのはuserIDでよいのでは？
     $id = htmlspecialchars($row->userID);
     $icon = htmlspecialchars($row->userIcon);
     $name = htmlspecialchars($row->userName);
   }
 }
-echo("<h3>$id</h3><br >");
+//echo("<h3>$id</h3><br >");
+echo("<div class='info'>");
 echo("<img src=$icon><br >");
-echo("<h3>$name</h3><br >");
+echo("<h3 class='name'>$name</h3><br >");
+echo("</div>");
  ?>
 <!-- フォローリストおわり -->
 <?php $db->close(); ?>
