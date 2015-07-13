@@ -15,7 +15,7 @@
 	//データベース接続処理
 	$dbName = 'haxeon';
 	$user = 'root';
-	$password = 'w3whS2jS23';
+	$password = 'DELL';
 
 	$db = new mysqli('localhost', $user ,$password, $dbName) or die("error");
 	//データベースへの接続が失敗したらエラーを出力して終了
