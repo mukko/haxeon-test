@@ -9,7 +9,7 @@
 	//DBへの接続処理
 	$dbName 	= 'haxeon';
 	$user		= 'root';
-	$password 	= 'w3whS2jS23';
+	$password 	= 'DELL';
 
 	$db = new mysqli('localhost', $user ,$password, $dbName) or die("error");
 	if ($db->connect_error){
@@ -19,19 +19,22 @@
 	
 	//未ログイン時の処理
 	if (!isset($_COOKIE["PHPSESSID"])) {
+		//スマーティのログイン情報の判定変数を設定
 		$smarty->assign('isLogin', false);
 	}
 	//ログイン時はアイコンURLを取得する
 	else {
+		session_start();
+		$name = $_SESSION['userName'];
 		$smarty->assign('isLogin', true);
-		$smarty->assign('userName', $_GET[account]);
-		$result =  $db->query("SELECT `userIcon` FROM `account` WHERE `userName` = \"$_GET[account]\"");
+		$smarty->assign('userName', $name);
+		$result =  $db->query("SELECT `userIcon` FROM `account` WHERE `userName` = \""+$name+"\"");
 		if($result){
 			while($row = $result->fetch_object()){
 				$icon = htmlspecialchars($row->userIcon);
+				$smarty->assign('iconURL',$icon);
 			}
 		}
-		$smarty->assign('iconURL',$icon);
 	}
 	
 	$smarty->display('common.tpl');

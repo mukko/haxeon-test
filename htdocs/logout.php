@@ -1,20 +1,15 @@
-﻿<html>
-	<head><title>ログアウト</title></head>
-
-	<body>
-
-	<?php
-
+﻿<?php
+	include("common.php");
+	
+	require_once('Smarty.class.php');
+	$smarty = new Smarty();
+	
 	header("Content-Type: text/html; charset=UTF-8");
-	// セッションの初期化
-	// session_name("something")を使用している場合は特にこれを忘れないように!
-	session_start();
 
-	// セッション変数を全て解除する
+	//セッション変数を全て解除する
 	$_SESSION = array();
 
-	// セッションを切断するにはセッションクッキーも削除する。
-	// Note: セッション情報だけでなくセッションを破壊する。
+	//セッションを切断するにはセッションクッキーも削除する。
 	if (ini_get("session.use_cookies")) {
 		$params = session_get_cookie_params();
 		setcookie(session_name(), '', time() - 42000,
@@ -23,12 +18,7 @@
 		);
 	}
 
-	// 最終的に、セッションを破壊する
+	//セッションを破壊する
 	session_destroy();
-	?>
-
-	ログアウトします...
-	<meta http-equiv="refresh" content="2;URL=http://localhost/haxeon/index.php">
-
-	</body>
-</html>
+	
+	$smarty->display('logout.tpl');
