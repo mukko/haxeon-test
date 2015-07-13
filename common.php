@@ -2,10 +2,10 @@
 	//スマーティを使用
 	require_once('Smarty.class.php');
 	$smarty = new Smarty();
-	
+
 	//共通部分のURL登録
 	$smarty->assign('commonURL', 'http://localhost/haxeon/');
-	
+
 	//DBへの接続処理
 	$dbName 	= 'haxeon';
 	$user		= 'root';
@@ -16,7 +16,7 @@
 	  print("connection error" . $db->connect_error . "<br>");
 	  exit();
 	}
-	
+
 	//未ログイン時の処理
 	if (!isset($_COOKIE["PHPSESSID"])) {
 		//スマーティのログイン情報の判定変数を設定
@@ -36,6 +36,6 @@
 			}
 		}
 	}
-	
+
 	$smarty->display('common.tpl');
 ?>
