@@ -25,10 +25,12 @@
 	//ログイン時はアイコンURLを取得する
 	else {
 		session_start();
-		$name = $_SESSION['userName'];
+		$name = $_SESSION['userID'];
+		
 		$smarty->assign('isLogin', true);
 		$smarty->assign('userName', $name);
-		$result =  $db->query("SELECT `userIcon` FROM `account` WHERE `userName` = \""+$name+"\"");
+		$result =  $db->query("SELECT `userIcon` FROM `account` WHERE `userID` = \"".$name."\"");
+		
 		if($result){
 			while($row = $result->fetch_object()){
 				$icon = htmlspecialchars($row->userIcon);

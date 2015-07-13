@@ -3,7 +3,7 @@
 session_start();
 if(!isset($_SESSION['userID']))
 {
-	echo '{ "error":"access denied"}';
+	echo '{ "error":"not login"}';
 	exit;
 }
 echo '{ "userID":"' . $_SESSION['userID'] . '"}';

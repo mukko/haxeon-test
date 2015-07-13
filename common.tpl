@@ -16,9 +16,8 @@
 	<ul>
 	<!-- ログイン時はアカウント名とサービスを表示　-->
 	{if $isLogin}
-		<li><h3>Hello, <img src={"img/icon/icon1.jpg"} width=50% height=100%> {$userName}</h3>
+		<li><h3>Hello, <img src={$iconURL} width=50% height=100%> {$userName}</h3>
 			<ul>
-				<li><a href={$commonURL}profile.php>Profile</a></li>
 				<li><a href="#">Posted Codes</a></li>
 				<li><a href="#">Favorite Codes</a></li>
 				<li><a href="#">Followers</a></li>
