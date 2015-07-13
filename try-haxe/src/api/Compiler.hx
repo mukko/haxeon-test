@@ -360,7 +360,7 @@ class Compiler {
 				host : "localhost",
 				port : 3306,
 				user : "root",
-				pass : "koji",
+				pass : "DELL",
 				database : "haxeon",
 				socket : null
 			}
