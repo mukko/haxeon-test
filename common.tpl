@@ -37,7 +37,7 @@
 		<li>Create Code
 			<ul>
 				<li><a href={$commonURL}try-haxe/index.html>Try-haxe</a></li>
-				<li><a href={$commonURL}createProject.html>Create Project</a></li>
+				<li><a href={$commonURL}create_form.php>Create Project</a></li>
 			</ul>
 		</li>
 
