@@ -1,12 +1,5 @@
-<html>
-	<head>
-	<meta charset="UTF-8" />
-	<link rel="stylesheet" type="text/css" href="css/index.css" />
-	<title>Haxe on!</title>
-	</head>
 
-	<body>
-	<font face="ヒラギノ角ゴ Pro W3","メイリオ">
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
 
 	<!-- ヘッダー -->
 	<div id="header"><h1><a href={$commonURL}>Haxe On!</a></h1></div>
@@ -63,7 +56,4 @@
 			</ul>
 		</li>
 	</ul>
-	</font>
-	</body>
-
-</html>
+</div>
