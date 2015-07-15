@@ -12,21 +12,28 @@
 
 		while($row = $result->fetch_object()){
 			$proID = htmlspecialchars($row->projectID);
+			$proName = htmlspecialchars($row->projectName);
 			$userID = htmlspecialchars($row->ownerUserID);
 			$pv = htmlspecialchars($row->pv);
 			$url = htmlspecialchars($row->url);
 
+			//projectテーブルのuserIDをつかって、accountテーブルからuserNameを取得する
+			$accountdata = $db->query("SELECT * FROM `ACCOUNT` WHERE userID = \"".$userID."\"");
+			$userName;
+			if($accountdata){
+				$row = $accountdata->fetch_object();
+				$userName = htmlspecialchars($row->userName);
+			}
+
 			$obj = array(
 				'proID' => $proID,
+				'proName' => $proName,
 				'userID' => $userID,
+				'userName' => $userName,
 				'pv' => $pv,
 				'url' => $url,
 			);
 			array_push($array, $obj);
-
-			//デバッグ用
-			//echo "第 $i 位 <a href=$url > $proID   </a>";
-			//echo("| $userID | $pv PV!!! <br> ");
 			$i++;
 		}
 		$smarty->assign('var', $array);
