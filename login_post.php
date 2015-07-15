@@ -34,7 +34,7 @@
 			$userName = htmlspecialchars($row->userName);
 		}
 		//フォームから入力されたパスワードとDBのパスワードが一致したら成功
-		if($userPass == $pass && $userID == $id){
+		if($userPass == $pass && $userID == $id && ($id != "") && ($pass != "")){
 			//セッション開始命令
 			session_start();
 			$_SESSION['userID'] = $userID;
