@@ -38,6 +38,9 @@
       </div>
     </div>
     <div class="project">
+      {for $i=0 to $projects|@count-1}
+      {$projects[$i].id}
+      {/for}
     </div>
   </font>
 </body>
