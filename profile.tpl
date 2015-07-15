@@ -18,21 +18,21 @@
         {$userID}
       </div>
       <div class="userURL">
-        {!(if $userURL === 'none')}
+        {if $userURL !== "none"}
           {$userURL}
-          {/if}
-        </div>
-        <div class="userMail">
-          {!(if $userMail === 'none')}
-            {$userMail}
-          {/if}
-        </div>
-        <div class="userProfile">
-          {!(if $userProfile === 'none')}
-            {$userProfile}
-          {/if}
-        </div>
+        {/if}
       </div>
+      <div class="userMail">
+        {if $userMail !== 'none'}
+          {$userMail}
+        {/if}
+      </div>
+      <div class="userProfile">
+        {if $userProfile !== 'none'}
+          {$userProfile}
+        {/if}
+      </div>
+    </div>
   </font>
 </body>
 </html>
