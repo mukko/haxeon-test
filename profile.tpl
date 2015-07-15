@@ -6,33 +6,42 @@
 </head>
 
 <body>
-  <font face="メイリオ">
-    <div>
+  <font face="ヒラギノ角ゴ Pro W3","メイリオ">
+    <div class="profile">
       <div class="image">
-        <img src={$userIcon}>
+        <img id="icon" src={$userIcon}>
       </div>
       <div class="userName">
         {$userName}
       </div>
       <div class="userId">
-        {$userID}
+        @{$userID}
       </div>
+      <hr class="line">
       <div class="userURL">
-        {!(if $userURL === 'none')}
-          {$userURL}
-          {/if}
-        </div>
-        <div class="userMail">
-          {!(if $userMail === 'none')}
-            {$userMail}
-          {/if}
-        </div>
-        <div class="userProfile">
-          {!(if $userProfile === 'none')}
-            {$userProfile}
-          {/if}
-        </div>
+        URL:
+        {if $userURL !== "none"}
+        {$userURL}
+        {/if}
       </div>
+      <div class="userMail">
+        mail:
+        {if $userMail !== 'none'}
+        {$userMail}
+        {/if}
+      </div>
+      <hr class="line">
+      <div class="userProfile">
+        {if $userProfile !== 'none'}
+        {$userProfile}
+        {/if}
+      </div>
+    </div>
+    <div class="project">
+      {for $i=0 to $projects|@count-1}
+      {$projects[$i].id}
+      {/for}
+    </div>
   </font>
 </body>
 </html>

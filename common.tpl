@@ -18,6 +18,7 @@
 	{if $isLogin}
 		<li><h3>Hello, <img src={$iconURL} width=50% height=100%> {$userName}</h3>
 			<ul>
+				<li><a href={$commonURL}profile.php>Profile</a></li>
 				<li><a href="#">Posted Codes</a></li>
 				<li><a href="#">Favorite Codes</a></li>
 				<li><a href="#">Followers</a></li>
@@ -39,14 +40,14 @@
 				<li><a href="#">Forked Count Ranking</a></li>
 			</ul>
 		</li>
-		
+
 		<li>Create Code
 			<ul>
 				<li><a href={$commonURL}try-haxe/index.html>Try-haxe</a></li>
 				<li><a href={$commonURL}createProject.html>Create Project</a></li>
 			</ul>
 		</li>
-		
+
 		<li>Q&A
 			<ul>
 				<li><a href="#">New Question</a></li>
