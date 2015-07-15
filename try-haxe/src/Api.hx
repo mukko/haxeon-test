@@ -114,7 +114,11 @@ class Api {
 			      },
 			      dce : dce,
 			      target : SWF( "test", 11.4 ),
-			      libs : new Array()
+			      libs : new Array(),
+				  
+				  //追加部分
+				  userID : "",
+				  projectName : "",
 				}
 				
 				compiler.prepareProgram( program );

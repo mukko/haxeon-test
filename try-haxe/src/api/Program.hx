@@ -5,8 +5,12 @@ typedef Program = {
 	main : Module,
 	target : Target,
 	libs:Array<String>,
-	dce : String
+	dce : String,
 //	?modules : Hash<Module>,
+	
+	//追加部分
+	userID : String,
+	projectName : String,
 }
 
 typedef Module = {
