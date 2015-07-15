@@ -8,7 +8,6 @@
   $uid = $_SESSION['userID'];
   $result = $db->query("SELECT * FROM `account` WHERE userID = \"".$uid."\"");
   if($result){
-    $infomation = [];
     while($row = $result->fetch_object()){
       $userID = htmlspecialchars($row->userID);
       $userName = htmlspecialchars($row->userName);
@@ -24,6 +23,26 @@
       $smarty->assign('userURL', $userURL);
       $smarty->assign('userMail', $userMail);
     }
+
+  //プロジェクト情報を取得
+  $result = $db->query("SELECT * FROM `project` WHERE `ownerUserID` = \"".$uid."\"");
+  $array = [];
+  if($result){
+    while($row = $result->fetch_object()){
+      $projectID = htmlspecialchars($row->projectID);
+      $projectName = htmlspecialchars($row->projectName);
+      $pv = htmlspecialchars($row->pv);
+      $url = htmlspecialchars($row->url);
+
+      array_push($array,array(
+        'id' => $projectID,
+        'name' => $projectName,
+        'pv' => $pv,
+        'url' => $url,
+      ));
+    }
+  }
+    $smarty->assign('projects', $array);
 
     $db->close();
     $smarty->display('profile.tpl');
