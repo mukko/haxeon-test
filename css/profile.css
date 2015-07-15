@@ -7,22 +7,22 @@ body {
   width: 100%;
 }
 
-div.profile {
-  z-index: 1;
+div.container {
   position: relative;
   top: 40px;
-  left: 10%;
+}
+
+div.profile {
+  position: relative;
+  /*left: 10%;*/
   float: left;
+  width: 20%;
   text-align: left;
 }
 
-div.profile .image {
-  width: 30%;
-}
-
-div.profile .image #icon {
-  width: 200px;
-  height: 200px:
+div.profile img {
+  width: 300px;
+  max-width: 100%;
 }
 
 div.profile .userName {
@@ -51,4 +51,9 @@ div.profile .userProfile {
   height: 2px;
   background-color: #777777;
   border: 0;
+}
+
+div.projects {
+  float: right;
+  width: 80%
 }

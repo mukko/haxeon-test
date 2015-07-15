@@ -7,6 +7,7 @@
 
 <body>
   <font face="ヒラギノ角ゴ Pro W3","メイリオ">
+    <div class="container">
     <div class="profile">
       <div class="image">
         <img id="icon" src={$userIcon}>
@@ -37,10 +38,11 @@
         {/if}
       </div>
     </div>
-    <div class="project">
+    <div class="projects">
       {for $i=0 to $projects|@count-1}
       {$projects[$i].id}
       {/for}
+    </div>
     </div>
   </font>
 </body>
