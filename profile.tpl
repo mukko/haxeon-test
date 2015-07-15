@@ -6,32 +6,38 @@
 </head>
 
 <body>
-  <font face="メイリオ">
-    <div>
+  <font face="ヒラギノ角ゴ Pro W3","メイリオ">
+    <div class="profile">
       <div class="image">
-        <img src={$userIcon}>
+        <img id="icon" src={$userIcon}>
       </div>
       <div class="userName">
         {$userName}
       </div>
       <div class="userId">
-        {$userID}
+        @{$userID}
       </div>
+      <hr class="line">
       <div class="userURL">
+        URL:
         {if $userURL !== "none"}
-          {$userURL}
+        {$userURL}
         {/if}
       </div>
       <div class="userMail">
+        mail:
         {if $userMail !== 'none'}
-          {$userMail}
+        {$userMail}
         {/if}
       </div>
+      <hr class="line">
       <div class="userProfile">
         {if $userProfile !== 'none'}
-          {$userProfile}
+        {$userProfile}
         {/if}
       </div>
+    </div>
+    <div class="project">
     </div>
   </font>
 </body>
