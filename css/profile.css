@@ -9,12 +9,11 @@ body {
 
 div.container {
   position: relative;
-  top: 40px;
+  top: 10px;
 }
 
 div.profile {
   position: relative;
-  /*left: 10%;*/
   float: left;
   width: 20%;
   text-align: left;
