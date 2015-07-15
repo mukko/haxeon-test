@@ -20,5 +20,4 @@
 	<div id="footer"><address>Copyright (c) シテイル All Rights Reserved.</address></div>
 	</div>
 	</font>
-	</body>
 </html>

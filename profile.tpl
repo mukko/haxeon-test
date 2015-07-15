@@ -5,7 +5,7 @@
   <title>Profile</title>
   <font face="ヒラギノ角ゴ Pro W3","メイリオ">
 </head>
-<body>
+
   <div class="container">
     <div class="profile">
       <div class="image">
@@ -46,6 +46,6 @@
       {/for}
     </div>
   </div>
-</body>
+
   <!-- </font> -->
 </html>
