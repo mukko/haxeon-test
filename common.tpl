@@ -22,7 +22,7 @@
 	{else}
 		<li><a href={$commonURL}login_form.php>Login</a>
 			<ul>
-				<li><a href={$commonURL}signup.html>Signup</a></li>
+				<li><a href={$commonURL}signup_form.php>Signup</a></li>
 			</ul>
 		</li>
 	{/if}

@@ -21,8 +21,9 @@
 			$accountdata = $db->query("SELECT * FROM `ACCOUNT` WHERE userID = \"".$userID."\"");
 			$userName;
 			if($accountdata){
-				$row = $accountdata->fetch_object();
-				$userName = htmlspecialchars($row->userName);
+				while($row = $accountdata->fetch_object()) {
+						$userName = htmlspecialchars($row->userName);
+				}
 			}
 
 			$obj = array(
