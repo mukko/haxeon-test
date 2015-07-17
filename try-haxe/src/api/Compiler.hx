@@ -20,7 +20,7 @@ import sys.db.Sqlite;
 using StringTools;
 using Lambda;
 
-typedef HTMLConf = 
+typedef HTMLConf =
 {
 	head:Array<String>,
 	body:Array<String>
@@ -30,7 +30,7 @@ class Compiler {
 
 	var tmpDir : String;
 	var mainFile : String;
-	
+
 	public static var haxePath = "C:/HaxeToolkit/haxe/haxe.exe";
 
 	public function new(){}
@@ -40,7 +40,7 @@ class Compiler {
 			~/@([^:]*):([\/*a-zA-Z\s]*)(macro|build|autoBuild|file|audio|bitmap|font)/,
 			~/macro/
 		];
-		for( f in forbidden ) if( f.match( s ) ) throw "Unauthorized macro : "+f.matched(0)+"";  
+		for( f in forbidden ) if( f.match( s ) ) throw "Unauthorized macro : "+f.matched(0)+"";
 	}
 
 	public function prepareProgram( program : Program ){
@@ -72,7 +72,7 @@ class Compiler {
 
 		var source = program.main.source;
 		checkMacros( source );
-		
+
 		File.saveContent( mainFile , source );
 
 		var s = program.main.source;
@@ -82,16 +82,16 @@ class Compiler {
 
 	}
 
-	//public function getProgram(uid:String):{p:Program, o:Program.Output} 
+	//public function getProgram(uid:String):{p:Program, o:Program.Output}
 	public function getProgram(uid:String):Program
 	{
 		Api.checkSanity(uid);
-		
+
 		if (FileSystem.isDirectory( Api.tmp + "/" + uid ))
 		{
 			tmpDir = Api.tmp + "/" + uid + "/";
 
-			var s = File.getContent(tmpDir + "program"); 
+			var s = File.getContent(tmpDir + "program");
 			var p:Program = haxe.Unserializer.run(s);
 
 			mainFile = tmpDir + p.main.name + ".hx";
@@ -135,7 +135,7 @@ class Compiler {
 
 	// TODO: topLevel competion
 	public function autocomplete( program : Program , idx : Int ) : CompletionResult{
-		
+
 		try{
 			prepareProgram( program );
 		}catch(err:String){
@@ -170,7 +170,7 @@ class Compiler {
 
 		try{
 			var xml = new haxe.xml.Fast( Xml.parse( out.err ).firstChild() );
-			
+
 			if (xml.name == "type") {
 				var res = xml.innerData.trim().htmlUnescape();
 				res = res.replace(" ->", ",");
@@ -192,14 +192,14 @@ class Compiler {
 			return {list:words};
 
 		}catch(e:Dynamic){
-			
+
 		}
 
 		return {errors:SourceTools.splitLines(out.err.replace(tmpDir, ""))};
-		
+
 	}
 
-	function addLibs(args:Array<String>, program:Program, ?html:HTMLConf) 
+	function addLibs(args:Array<String>, program:Program, ?html:HTMLConf)
 	{
 		var availableLibs = Libs.getLibsConfig(program.target);
 		for( l in availableLibs ){
@@ -219,13 +219,13 @@ class Compiler {
 					args.push("-lib");
 					args.push(l.name);
 				}
-				if( l.args != null ) 
+				if( l.args != null )
 					for( a in l.args ){
 						args.push(a);
 					}
 			}
 		}
-		
+
 	}
 
 	public function compile( program : Program ){
@@ -260,7 +260,7 @@ class Compiler {
 		var embedSrc = '<iframe src="http://${Api.host}${Api.base}/embed/${program.uid}" width="100%" height="300" frameborder="no" allowfullscreen>
 	<a href="http://${Api.host}/#${program.uid}">Try Haxe !</a>
 </iframe>';
-		
+
 		var html:HTMLConf = {head:[], body:[]};
 
 		switch( program.target ){
@@ -283,12 +283,12 @@ class Compiler {
 						display:none;
 					}
 					</style>");
-				
+
 
 			case SWF( name , version ):
 				Api.checkSanity( name );
 				outputPath = tmpDir + name + ".swf";
-				
+
 				args.push( "-swf" );
 				args.push( outputPath );
 				args.push( "-swf-version" );
@@ -304,7 +304,7 @@ class Compiler {
 
 		addLibs(args, program, html);
 		//trace(args);
-		
+
 		var out = runHaxe( args );
 		var err = out.err.replace(tmpDir, "");
 		var errors = SourceTools.splitLines(err);
@@ -336,14 +336,14 @@ class Compiler {
 				source : ""
 			}
 		}
-		
+
 		//追加部分
 		var userID = program.userID;
 		var projectName = program.projectName;
 		html.body.push("<br><H3>"+program+"</H3>");
-		
+
 		var UNKNOWN_USERNAME = "__unknown__";
-		
+
 		//データベース処理追加
 		if (out.exitCode == 0) {
 			var cnx = Mysql.connect( {
@@ -355,19 +355,19 @@ class Compiler {
 				socket : null
 			}
 			);
-			
+
 			//ユーザ名とプロジェクト名からプロジェクトIDを検索
 			var rset = cnx.request("SELECT projectID FROM project where ownerUserID = '" + userID + "' AND projectName = '" + projectName+"';");
-			
+
 			//長さが0ならプロジェクト所持者ではないと判定し、新規プロジェクト作成
 			if (rset.length == 0) {
 				html.body.push("<br><H3>プロジェクトIDなし</H3>");
-				
+
 				//プロジェクトIDの重複を確認
 				var rset2 = cnx.request("SELECT projectID FROM project where projectID = \"" + program.uid + "\";");
 				//重複無しならデータベースに登録
 				if (rset2.length == 0) {
-					cnx.request("INSERT INTO `project`(`projectID`, `projectName` ,`ownerUserID`, `pv`, `url`) VALUES (\""+program.uid+"\", \"sampleProject\",\""+UNKNOWN_USERNAME+"\","+10+",\"http://localhost/haxeon/try-haxe/index.html#"+program.uid+"\")");
+					cnx.request("INSERT INTO `project`(`projectID`, `projectName` ,`ownerUserID`, `pv`, `url`) VALUES (\""+program.uid+"\", \""+projectName+"\",\""+userID+"\","+0+",\"http://localhost/haxeon/try-haxe/index.html#"+program.uid+"\")");
 					html.body.push("<br><H3>データベースにIDを登録しました。</H3>");
 				}
 			}
@@ -379,16 +379,16 @@ class Compiler {
 				}
 				cnx.request("UPDATE project SET projectID = \""+program.uid+"\", url = \"http://localhost/haxeon/try-haxe/index.html#"+program.uid+"\" WHERE ownerUserID = '" + userID + "' AND projectName = '" + projectName+"';");
 			}
-			
+
 			cnx.close();
 		}
-		
+
 		//追加部分終了
-		
+
 		if (out.exitCode == 0)
 		{
 			switch (program.target) {
-				case JS(_): 
+				case JS(_):
 					output.source = File.getContent(outputPath);
 					html.body.push("<script>" + output.source + "</script>");
 				default:
@@ -397,7 +397,7 @@ class Compiler {
 			h.add("<html>\n\t<head>\n\t\t<title>Haxe Run</title>");
 			for (i in html.head) { h.add("\n\t\t"); h.add(i); }
 			h.add("\n\t</head>\n\t<body>");
-			for (i in html.body) { h.add("\n\t\t"); h.add(i); } 
+			for (i in html.body) { h.add("\n\t\t"); h.add(i); }
 			h.add('\n\t</body>\n</html>');
 
 			File.saveContent(htmlPath, h.toString());
@@ -406,18 +406,18 @@ class Compiler {
 		{
 			if (FileSystem.exists(htmlPath)) FileSystem.deleteFile(htmlPath);
 		}
-		
+
 		return output;
 	}
-	
+
 	function runHaxe( args : Array<String> ){
-		
+
 		var proc = new sys.io.Process( haxePath , args );
-		
+
 		var exit = proc.exitCode();
 		var out = proc.stdout.readAll().toString();
 		var err = proc.stderr.readAll().toString();
-		
+
 		var o = {
 			proc : proc,
 			exitCode : exit,
