@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<font face="ヒラギノ角ゴ Pro W3","メイリオ">
 	<div class="hotcode">
 	<font size="10">Hot Codes</font><br>
 

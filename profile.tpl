@@ -3,9 +3,8 @@
   <meta charset="utf-8" />
   <link rel="stylesheet" type="text/css" href="css/profile.css" />
   <title>Profile</title>
-  <font face="ヒラギノ角ゴ Pro W3","メイリオ">
 </head>
-
+<font face="ヒラギノ角ゴ Pro W3","メイリオ">
   <div class="container">
     <div class="profile">
       <div class="image">
@@ -39,13 +38,14 @@
     </div>
     <div class="projects">
       {for $i=0 to $projects|@count-1}
-      {$projects[$i].id}
-      {$projects[$i].name}
-      {$projects[$i].pv}
-      {$projects[$i].url}
+      <div>
+        <p class="title">
+          <a href={$projects[$i].url} title={$projects[$i].name}>{$projects[$i].name}</a>
+        </p>
+        {$projects[$i].pv}
+      </div>
       {/for}
     </div>
   </div>
-
-  <!-- </font> -->
+</font>
 </html>
