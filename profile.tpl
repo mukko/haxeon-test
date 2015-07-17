@@ -36,15 +36,20 @@
         {/if}
       </div>
     </div>
-    <div class="projects">
-      {for $i=0 to $projects|@count-1}
-      <div>
-        <p class="title">
-          <a href={$projects[$i].url} title={$projects[$i].name}>{$projects[$i].name}</a>
-        </p>
-        {$projects[$i].pv}
+    <div class="contents">
+      <div class="projects">
+        <div class="head"><p>Projects</p></div>
+          <div class="boxContainer">
+          {for $i=0 to $projects|@count-1}
+            <div id={$projects[$i].id} class="box">
+              <p class="title">
+                <a href={$projects[$i].url} title={$projects[$i].name}>{$projects[$i].name}</a>
+              </p>
+              <span class="pv">{$projects[$i].pv}</span>
+            </div>
+            {/for}
+          </div>
       </div>
-      {/for}
     </div>
   </div>
 </font>
