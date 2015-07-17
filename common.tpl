@@ -2,7 +2,7 @@
 	<link rel="stylesheet" type="text/css" href="css/index.css" />
 
 	<!-- ヘッダー -->
-	<div id="header"><h1><a href={$commonURL}>Haxe On!</a></h1></div>
+	<div id="header"><h1><a href={$commonURL}><img src="img/haxeon_icon.png" style="width:auto; height:75px;"></a></h1></div>
 
 	<!-- タブリスト　-->
 	<div class="menu">
