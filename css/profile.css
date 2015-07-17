@@ -69,9 +69,14 @@ div.head {
 }
 
 .box {
+  float: left;
   position: relative;
+  vertical-align: top;
   display: inline-block;
-  width: 30%;
+  _display: inline;
+  zoom: 1;
+  margin-top: 20px;
+  width: 33%;
 }
 
 p.title {
