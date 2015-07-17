@@ -9,6 +9,6 @@
 				<td colspan="20" align="center"></td>
 			</tr>
 		</table>
-	</center>	
+	</center>
 	<input type="submit" value="作成"/>
 </form>
