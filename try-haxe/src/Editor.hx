@@ -56,11 +56,11 @@ class Editor {
 
     markers = [];
     lineHandles = [];
-
 		//CodeMirror.commands.autocomplete = autocomplete;
     CodeMirror.commands.compile = function(_) compile();
     CodeMirror.commands.togglefullscreen = toggleFullscreenSource;
 
+//怪しい部分
     HaxeLint.load();
 
   	haxeSource = CodeMirror.fromTextArea( cast new JQuery("textarea[name='hx-source']")[0] , {
@@ -173,7 +173,6 @@ class Editor {
     initLibs();
 
     setTarget( api.Program.Target.JS( "test" ) );
-
 		var uid = Browser.window.location.hash;
 		if (uid.length > 0){
       uid = uid.substr(1);
@@ -304,6 +303,10 @@ class Editor {
 
     // auto-fork
 	program.uid = null;
+	var con = new Http("http://localhost/haxeon/userinfo.php");
+	con.onError = onError;
+	con.onData = onResult2;
+	con.request(false);
 
 	  haxeSource.setValue(program.main.source);
       setTarget( program.target );
@@ -594,5 +597,11 @@ class Editor {
 		var userDatas = Json.parse(data);
 		program.userID = userDatas.userID;
 		program.projectName = userDatas.projectName;
+	}
+	private function onResult2(data : String) : Void {
+		trace(data);	//デバッグ
+		var userDatas = Json.parse(data);
+		program.userID = userDatas.userID;
+		program.projectName = "forked from:"+ program.projectName;
 	}
 }

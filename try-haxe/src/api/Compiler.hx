@@ -1,7 +1,5 @@
 package api;
 
-import haxe.Http;
-
 #if php
 import api.Completion.CompletionResult;
 import api.Completion.CompletionType;
