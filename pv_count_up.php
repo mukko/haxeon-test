@@ -1,9 +1,11 @@
 <?php
-	if (isset($_GET['id'])) {
+	if (isset($_GET['uid']) && isset($_GET['pName'])) {
 		
 		//URLから情報取得
-		$id = $_GET['id'];
+		$uid = $_GET['uid'];	//ユーザーID
+		$pName = $_GET['pName'];	//プロジェクト名
 		
+		echo 
 		//データベース接続処理
 		$dbName = 'haxeon';
 		$user = 'root';
@@ -17,7 +19,7 @@
 		}
 		
 		//pv数を取得して1増やす
-		$result = $db->query('SELECT `pv` FROM `project` WHERE `projectID` = "'.$id.'"');
+		$result = $db->query('SELECT `pv` FROM `project` WHERE `ownerUserID` = "'.$uid.'" AND `projectName` = "'.$pName.'"');
 		if ($result) {
 			while($row = $result->fetch_object()){
 				$pv = htmlspecialchars($row->pv);
@@ -25,7 +27,7 @@
 			$pv+=1;	
 			echo $pv;	//デバッグ
 			
-			$db->query('UPDATE `project` SET `pv`='.$pv.' WHERE `projectID` = "'.$id.'"');
+			$db->query('UPDATE `project` SET `pv`='.$pv.' WHERE `ownerUserID` = "'.$uid.'" AND `projectName` = "'.$pName.'"');
 		}
 		else {
 			echo "PVのカウントアップに失敗しました。";
