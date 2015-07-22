@@ -9,12 +9,8 @@ if(!isset($_SESSION['userID']))
 
 if(!isset($_SESSION['projectName']))
 {
-	echo '{ "userID":"' . $_SESSION['userID'] . '",
-					"projectName":""
-	}';
+	echo '{"userID":"'.$_SESSION['userID'].'","projectName":""}';
 	exit;
 }
 
-echo '{ "userID":"' . $_SESSION['userID'] . '",
-				"projectName":"' . $_SESSION['projectName'] . '"
-}';
+echo '{"userID":"'.$_SESSION['userID'].'","projectName":"'.$_SESSION['projectName'].'"}';

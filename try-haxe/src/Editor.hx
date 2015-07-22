@@ -593,15 +593,26 @@ class Editor {
 	}
 	//接続成功の場合
 	private function onResult(data : String) : Void {
-		trace(data);	//デバッグ
+		//trace(data+"1");	//デバッグ
 		var userDatas = Json.parse(data);
+		
+		//フォークチェック
+		//if (program.userID != userDatas.userID) trace("ITS FORK !!!!!!!!!!!!");
+		
 		program.userID = userDatas.userID;
 		program.projectName = userDatas.projectName;
 	}
 	private function onResult2(data : String) : Void {
-		trace(data);	//デバッグ
+		//trace(data+"2");	//デバッグ
 		var userDatas = Json.parse(data);
+		
+		//フォークチェック!!!!
+		if (program.userID != userDatas.userID) {
+			//trace("ITS FORK !!!!!!!!!!!!");
+			//フォークしたプロジェクトであることを記録
+			program.projectName = "Forked_from_"+program.projectName;
+		}
+		
 		program.userID = userDatas.userID;
-		program.projectName = "forked from:"+ program.projectName;
 	}
 }
