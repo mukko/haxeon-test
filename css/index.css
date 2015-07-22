@@ -34,7 +34,7 @@ div#header {
 	height:77px;	/*背景画像のサイズに合わせてボックスの高さを指定*/
 	background-image:url("img/bg_header.jpg");	/*ヘッダ部分の背景画像*/
 	background-repeat:no-repeat;		/*背景画像を繰り返さない*/
-	background-color:#cccccc;		/*ヘッダ部分の背景色*/
+	background-color:#000000;		/*ヘッダ部分の背景色*/
 	width:100%;
 	-moz-background-size:100% auto;
 	background-size:100% auto;
