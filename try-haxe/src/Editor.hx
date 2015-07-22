@@ -602,9 +602,13 @@ class Editor {
 		program.userID = userDatas.userID;
 		program.projectName = userDatas.projectName;
 	}
+	
 	private function onResult2(data : String) : Void {
 		//trace(data+"2");	//デバッグ
 		var userDatas = Json.parse(data);
+			
+		var con = new Http("http://localhost/haxeon/pv_count_up.php?uid="+program.userID+"&pName="+program.projectName);
+		con.request(false);
 		
 		//フォークチェック!!!!
 		if (program.userID != userDatas.userID) {
