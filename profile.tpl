@@ -10,6 +10,13 @@
       <div class="image">
         <img id="icon" src={$userIcon}>
       </div>
+      {if $userID!=$uid}
+      <div class="followBtn">
+        <a href="follow.php?id={$userID}">
+        <img src="img/followbutton.png" alt="フォローボタン">
+        </a>
+      </div>
+      {/if}
       <div class="userName">
         {$userName}
       </div>

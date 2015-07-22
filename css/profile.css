@@ -26,6 +26,11 @@ div.profile img {
   max-width: 100%;
 }
 
+div.profile .followBtn {
+  margin-top: 10px;
+  width: 100%;
+}
+
 div.profile .userName {
   font-size: 30px;
 }
@@ -56,7 +61,8 @@ div.profile .userProfile {
 
 div.projects {
   float: right;
-  width: 80%;
+  width: 75%;
+  padding-left: 5%;
 }
 
 div.head {

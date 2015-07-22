@@ -10,6 +10,8 @@
   if(isset($_GET['id'])){
     $uid = $_GET['id'];
   }
+  $smarty->assign('uid', $_SESSION['userID']);
+
   $result = $db->query("SELECT * FROM `account` WHERE userID = \"".$uid."\"");
   if($result){
     while($row = $result->fetch_object()){
