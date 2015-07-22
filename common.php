@@ -26,7 +26,7 @@
 	else {
 		session_start();
 		$id = $_SESSION['userID'];
-
+		$smarty->assign('id',$id);
 		$smarty->assign('isLogin', true);
 		// $smarty->assign('userName', $name);
 		$result =  $db->query("SELECT * FROM `account` WHERE `userID` = \"".$id."\"");

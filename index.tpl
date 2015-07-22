@@ -12,7 +12,7 @@
 		第 {$i+1} 位　:
 		<a href={$var[$i].url}> {$var[$i].proName} </a> |
 		<!-- 追加部分:urlは暫定です -->
-		<a href="profile/{$var[$i].userID}">{$var[$i].userName}</a> |
+		<a href="profile.php?id={$var[$i].userID}">{$var[$i].userName}</a> |
 		{$var[$i].pv}view!! <br>
 
 	{/for}

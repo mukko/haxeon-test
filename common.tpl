@@ -11,7 +11,7 @@
 	{if $isLogin}
 		<li><h3>Hello, <img src={$iconURL} width=50% height=100%> {$userName}</h3>
 			<ul>
-				<li><a href={$commonURL}profile.php>Profile</a></li>
+				<li><a href={$commonURL}profile.php?id={$id}>Profile</a></li>
 				<li><a href="#">Posted Codes</a></li>
 				<li><a href="#">Favorite Codes</a></li>
 				<li><a href="#">Followers</a></li>

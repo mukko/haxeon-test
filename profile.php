@@ -5,7 +5,11 @@
   $smarty = new Smarty();
 
   //ユーザー情報を取得
-  $uid = $_SESSION['userID'];
+  //$uid = $_SESSION['userID'];
+  $uid;
+  if(isset($_GET['id'])){
+    $uid = $_GET['id'];
+  }
   $result = $db->query("SELECT * FROM `account` WHERE userID = \"".$uid."\"");
   if($result){
     while($row = $result->fetch_object()){
