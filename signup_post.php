@@ -1,10 +1,10 @@
 ﻿<?php
 	require_once("common.php");
-	
+
 	//Smartyを使用
 	require_once('Smarty.class.php');
 	$smarty = new Smarty();
-	
+
 	//サインアップフォームからの情報取得
 	$id = $_POST['userID'];
 	$pass  = $_POST['userPass'];
@@ -13,19 +13,19 @@
 	$profile = $_POST['userProfile'];
 	$url = $_POST['userURL'];
 	$mail = $_POST['userMail'];
-	
+
 	//データベース接続処理
 	$dbName = 'haxeon';
 	$user = 'root';
 	$password = 'DELL';
 	$db = new mysqli('localhost', $user , $password, $dbName) or die("error");
-	
+
 	//データベースへの接続が失敗したらエラーを出力して終了
 	if ($db->connect_error){
 	  print("接続失敗：" . $db->connect_error . "<br>");
 	  exit();
 	}
-	
+
 	//入力内容チェック処理
 	while (true) {
 		//IDの文字数チェック
@@ -57,20 +57,20 @@
 		}
 		//アイコン画像のチェック
 		if (strlen($_FILES["userIcon"]["name"]) == 0 ) {
-			error("ファイルをアップロードしてください。", $smarty);
-			break;
+			$filePass = "img/icon/empty_thumbnail.png";
+		}else{
+			//入力内容が正しかった場合
+			$filePass = "img/icon/".$_FILES["userIcon"]["name"];
+			//アップロードされた画像ファイルの保存
+			if (move_uploaded_file($_FILES["userIcon"]["tmp_name"], "img/icon/".$_FILES["userIcon"]["name"])) {
+				chmod("img/icon/".$_FILES["userIcon"]["name"],0644);
+				echo $_FILES["userIcon"]["name"] . "をアップロードしました。";
+			} else {
+				error("画像アップロードに失敗しました。お手数ですがやり直してください。", $smarty);
+				break;
+			}
 		}
-		
-		//入力内容が正しかった場合
-		$filePass = "img/icon/".$_FILES["userIcon"]["name"];
-		//アップロードされた画像ファイルの保存
-		if (move_uploaded_file($_FILES["userIcon"]["tmp_name"], "img/icon/".$_FILES["userIcon"]["name"])) {
-			chmod("img/icon/".$_FILES["userIcon"]["name"],0644);
-			echo $_FILES["userIcon"]["name"] . "をアップロードしました。";
-		} else {
-			error("画像アップロードに失敗しました。お手数ですがやり直してください。", $smarty);
-			break;
-		}
+
 		$result = $db->query("INSERT INTO `haxeon`.`account` (`userID`, `userPass`, `userName`, `userIcon`, `userProfile`, `userURL`,`userMail`) VALUES ( '$id', '$pass', '$name', '$filePass' , '$profile', '$url', '$mail');");
 		if ($result) {
 			//Smartyに変数登録
@@ -85,16 +85,15 @@
 		}
 		break;
 	}
-	
+
 	$db->close();
-	
+
 	$smarty->display('signup_post.tpl');
 
-	
+
 //エラー出力関数
 function error($errorMsg, $smarty) {
 	$smarty->assign('errorMassage', $errorMsg);
 	$smarty->assign('preLink', $_SERVER['HTTP_REFERER']);
 	$smarty->assign('isCorrect', false);
 }
-
