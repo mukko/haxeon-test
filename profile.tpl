@@ -26,9 +26,7 @@
       <hr class="line">
       <div class="userURL">
         URL:
-        {if $userURL !== "none"}
-        <a href={$userURL}></a>
-        {/if}
+        <a href={$userURL}>{$userURL}</a>
       </div>
       <div class="userMail">
         mail:
