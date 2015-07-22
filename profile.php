@@ -54,7 +54,7 @@
     $followID = $uid;
     $result = $db->query("SELECT userFollowingID FROM follow WHERE userID = \"".$_SESSION['userID']."\" ");
     $id = "";
-    $isFollow = true;
+    $isFollow = false;
     if($result){
       while($row = $result->fetch_object()){
         $id = htmlspecialchars($row->userFollowingID);
