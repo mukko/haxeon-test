@@ -50,6 +50,23 @@
   }
     $smarty->assign('projects', $array);
 
+    //フォロー情報
+    $followID = $uid;
+    $result = $db->query("SELECT userFollowingID FROM follow WHERE userID = \"".$_SESSION['userID']."\" ");
+    $id = "";
+    $isFollow = true;
+    if($result){
+      while($row = $result->fetch_object()){
+        $id = htmlspecialchars($row->userFollowingID);
+        if($id == $followID) {
+          $isFollow = true;
+          break;
+        }
+        $isFollow = false;
+      }
+    }
+    $smarty->assign('isFollow', $isFollow);
+
     $db->close();
     $smarty->display('profile.tpl');
   }
