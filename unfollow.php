@@ -18,18 +18,6 @@ $followid = $_GET['id'];
 
 $myid = $_SESSION['userID'];
 
-$result = $db->query("SELECT userFollowingID FROM follow WHERE userID = \"".$myid."\" ");
-$id = "";
-if($result){
-  while($row = $result->fetch_object()){
-    $id = htmlspecialchars($row->userFollowingID);
-    if($id == $followid) {
-      header("Location: ".$before."");
-      exit();
-    }
-  }
-}
-
-$result = $db->query("INSERT INTO follow(userID, userFollowingID) VALUES (\"".$myid."\",\"".$followid."\")");
+$result = $db->query("DELETE FROM `follow` WHERE `userID` = \"".$myid."\" AND `userFollowingID` =  \"".$followid."\"");
 
 header("Location: ".$before."");

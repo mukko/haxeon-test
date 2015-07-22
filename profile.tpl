@@ -10,12 +10,20 @@
       <div class="image">
         <img id="icon" src={$userIcon}>
       </div>
-      {if $userID!=$uid && !$isFollow}
+      {if  $userID!=$uid}
+      {if $isFollow}
+      <div class="unfollowBtn">
+        <a href="unfollow.php?id={$userID}">
+        <img src="img/unfollowbutton.png" alt="アンフォローボタン">
+        </a>
+      </div>
+      {else}
       <div class="followBtn">
         <a href="follow.php?id={$userID}">
         <img src="img/followbutton.png" alt="フォローボタン">
         </a>
       </div>
+      {/if}
       {/if}
       <div class="userName">
         {$userName}
