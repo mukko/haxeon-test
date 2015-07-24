@@ -6,54 +6,55 @@
 </head>
 <font face="ヒラギノ角ゴ Pro W3","メイリオ">
   <div class="container">
-    <div class="profile">
-      <div class="image">
-        <img id="icon" src={$userIcon}>
-      </div>
-      {if  $userID!=$uid}
-      {if $isFollow}
-      <div class="unfollowBtn">
-        <a href="unfollow.php?id={$userID}">
-        <img src="img/unfollowbutton.png" alt="アンフォローボタン">
-        </a>
-      </div>
-      {else}
-      <div class="followBtn">
-        <a href="follow.php?id={$userID}">
-        <img src="img/followbutton.png" alt="フォローボタン">
-        </a>
-      </div>
-      {/if}
-      {/if}
-      <div class="userName">
-        {$userName}
-      </div>
-      <div class="userId">
-        @{$userID}
-      </div>
-      <hr class="line">
-      <div class="userURL">
-        URL:
-        <a href={$userURL}>{$userURL}</a>
-      </div>
-      <div class="userMail">
-        mail:
-        {if $userMail !== 'none'}
-        {$userMail}
+    <div class="main">
+      <div class="profile">
+        <div class="image">
+          <img id="icon" src={$userIcon}>
+        </div>
+        {if  $userID!=$uid}
+        {if $isFollow}
+        <div class="unfollowBtn">
+          <a href="unfollow.php?id={$userID}">
+            <img src="img/unfollowbutton.png" alt="アンフォローボタン">
+          </a>
+        </div>
+        {else}
+        <div class="followBtn">
+          <a href="follow.php?id={$userID}">
+            <img src="img/followbutton.png" alt="フォローボタン">
+          </a>
+        </div>
         {/if}
-      </div>
-      <hr class="line">
-      <div class="userProfile">
-        {if $userProfile !== 'none'}
-        {$userProfile}
         {/if}
+        <div class="userName">
+          {$userName}
+        </div>
+        <div class="userId">
+          @{$userID}
+        </div>
+        <hr class="line">
+        <div class="userURL">
+          URL:
+          <a href={$userURL}>{$userURL}</a>
+        </div>
+        <div class="userMail">
+          mail:
+          {if $userMail !== 'none'}
+          {$userMail}
+          {/if}
+        </div>
+        <hr class="line">
+        <div class="userProfile">
+          {if $userProfile !== 'none'}
+          {$userProfile}
+          {/if}
+        </div>
       </div>
-    </div>
-    <div class="contents">
-      <div class="projects">
-        <div class="head"><p>Projects</p></div>
+      <div class="contents">
+        <div class="projects">
+          <div class="head"><p>Projects</p></div>
           <div class="boxContainer">
-          {for $i=0 to $projects|@count-1}
+            {for $i=0 to $projects|@count-1}
             <div id={$projects[$i].id} class="box">
               <p class="title">
                 <a href={$projects[$i].url} title={$projects[$i].name}>{$projects[$i].name}</a>
@@ -62,8 +63,10 @@
             </div>
             {/for}
           </div>
+        </div>
       </div>
     </div>
+    {include file="footer.tpl"}
   </div>
 </font>
 </html>

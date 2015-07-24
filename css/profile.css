@@ -7,11 +7,13 @@ body {
   width: 100%;
 }
 
-div.container {
-  position: relative;
-  top: 10px;
-  padding-left: 5%;
-  padding-right: 5%;
+div.contents:after {
+  content: "";
+   display: block;
+   clear: both;
+   height: 1px;
+   overflow: hidden;
+   padding-bottom: 20px;
 }
 
 div.profile {
@@ -77,6 +79,14 @@ div.head {
 
 .boxContainer {
   top: 10px;
+}
+
+.boxContainer:after {
+  content: "";
+   display: block;
+   clear: both;
+   height: 1px;
+   overflow: hidden;
 }
 
 .box {

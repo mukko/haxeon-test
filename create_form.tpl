@@ -1,3 +1,6 @@
+
+<div class="container">
+	<div class="main">
 <p>プロジェクト名を入力してください。</p>
 
 <form action="create_post.php" method="post">
@@ -12,3 +15,6 @@
 	</center>
 	<input type="submit" value="作成"/>
 </form>
+</div>
+{include file="footer.tpl"}
+</div>

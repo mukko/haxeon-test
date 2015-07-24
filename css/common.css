@@ -112,13 +112,34 @@ div#header {
 /*============================================
 フッタ
 ============================================*/
+html,body{
+	height: 100%;
+}
+
+div.container {
+  position: relative;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+  top: 10px;
+  margin: 0 auto;
+}
+
+div.main{
+	padding-bottom: 42px;
+}
+
 div#footer {
 	height: 42px;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 	text-align: center;
 	clear: both;					/*回り込みを解除する*/
 	background-image: url("images/bg_footer.jpg");	/*フッタ部分の背景画像*/
 	background-repeat: no-repeat;			/*背景画像を繰り返さない*/
 	background-color: #cccccc;			/*フッタ部分の背景色*/
+	margin-top: 10px;
 }
 address {
 	font-style: normal;			 /*フォントスタイルを標準にする*/
