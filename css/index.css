@@ -3,6 +3,11 @@ div .hotcode {
 
 }
 
+.hotcode .projectContainer {
+  width: 80%;
+  margin: 0 auto;
+}
+
 .projectContainer:after {
   content: "";
    display: block;
