@@ -9,11 +9,11 @@ div .hotcode {
    clear: both;
    height: 1px;
    overflow: hidden;
-   padding-top: 10px;
-   padding-bottom: 10px;
+   padding-bottom: 20px;
 }
 
 .project {
+  border: solid;
   float: left;
   position: relative;
   vertical-align: top;
@@ -21,5 +21,7 @@ div .hotcode {
   _display: inline;
   zoom: 1;
   margin-top: 20px;
-  width: 33%;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 30%;
 }

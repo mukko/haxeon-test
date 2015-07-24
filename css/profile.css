@@ -80,6 +80,7 @@ div.head {
 }
 
 .box {
+  border: solid;
   float: left;
   position: relative;
   vertical-align: top;
@@ -87,7 +88,9 @@ div.head {
   _display: inline;
   zoom: 1;
   margin-top: 20px;
-  width: 33%;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 30%;
 }
 
 p.title {
