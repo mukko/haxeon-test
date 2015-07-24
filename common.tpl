@@ -14,7 +14,7 @@
 				<li><a href={$commonURL}profile.php?id={$id}>Profile</a></li>
 				<li><a href="#">Posted Codes</a></li>
 				<li><a href="#">Favorite Codes</a></li>
-				<li><a href="#">Followers</a></li>
+				<li><a href={$commonURL}followlist.php>Followers</a></li>
 				<li><a href={$commonURL}logout.php>Logout</a></li>
 			</ul>
 		</li>
