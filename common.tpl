@@ -20,8 +20,9 @@
 		</li>
 	<!-- 未ログイン時はログインとサインアップのリンクを表示　-->
 	{else}
-		<li><a href={$commonURL}login_form.php>Login</a>
+		<li>Login
 			<ul>
+				<li><a href={$commonURL}login_form.php>Login</a></li>
 				<li><a href={$commonURL}signup_form.php>Signup</a></li>
 			</ul>
 		</li>
