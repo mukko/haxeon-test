@@ -24,6 +24,7 @@
 			<ul>
 				<li><a href={$commonURL}login_form.php>Login</a></li>
 				<li><a href={$commonURL}signup_form.php>Signup</a></li>
+				<li><a href={$commonURL}signup_tmp_form.php>仮登録ページ(製作中)</li>
 			</ul>
 		</li>
 		{/if}
