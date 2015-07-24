@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html>
-<font face="ヒラギノ角ゴ Pro W3","メイリオ">
-	<div class="hotcode">
-	<font size="10">Hot Codes</font><br>
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<div class="hotcode">
+	<font size="10">Hot Codes</font>
 
-	{for $i=0 to $proNum-1}
+	<div class="projectContainer">
+		{for $i=0 to $proNum-1}
 		<!-- 表示するプロジェクトランキングは5個まで -->
-		{if {$i} == 5} {break} {/if}
+		{if {$i} == 3} {break} {/if}
 
 		<!-- プロジェクト情報表示 -->
-		第 {$i+1} 位　:
-		<a href={$var[$i].url}> {$var[$i].proName} </a> |
-		<!-- 追加部分:urlは暫定です -->
-		<a href="profile.php?id={$var[$i].userID}">{$var[$i].userName}</a> |
-		{$var[$i].pv}view!! <br>
-
-	{/for}
-
-	<!-- フッター -->
-	<br/><br/>
-	<div id="footer"><address>Copyright (c) シテイル All Rights Reserved.</address></div>
+		<div class="project">
+			第 {$i+1} 位
+			<div class="proName">
+				<a href={$var[$i].url}> {$var[$i].proName} </a>
+			</div>
+			<div class="userName">
+				author:	<a href="profile.php?id={$var[$i].userID}">{$var[$i].userName}</a>
+			</div>
+			<div class-"pv">
+				{$var[$i].pv} view
+			</div>
+		</div>
+		{/for}
 	</div>
-	</font>
+
+</div>
+<!-- フッター -->
+<div id="footer">
+	<address>Copyright (c) シテイル All Rights Reserved.</address>
+</div>
 </html>

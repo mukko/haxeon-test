@@ -1,0 +1,25 @@
+div .hotcode {
+  position: relative;
+
+}
+
+.projectContainer:after {
+  content: "";
+   display: block;
+   clear: both;
+   height: 1px;
+   overflow: hidden;
+   padding-top: 10px;
+   padding-bottom: 10px;
+}
+
+.project {
+  float: left;
+  position: relative;
+  vertical-align: top;
+  display: inline-block;
+  _display: inline;
+  zoom: 1;
+  margin-top: 20px;
+  width: 33%;
+}
