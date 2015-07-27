@@ -4,12 +4,12 @@
 	//Smartyを使用
 	require_once('Smarty.class.php');
 	$smarty = new Smarty();
-
+	
 	//サインアップフォームからの情報取得
 	$id = $_POST['userID'];
 	$pass = $_POST['userPass'];
 	$mail = $_POST['userMail'];
-
+	
 	//データベース接続処理
 	$dbName = 'haxeon';
 	$user = 'root';
@@ -53,14 +53,25 @@
 			}
 		}
 		
-		//取得したメールアドレス宛にメールを送信
+		//MD5ハッシュ値の生成
+		$hash = password_hash($id.$pass, PASSWORD_DEFAULT);
+		$iconPass = "http://localhost/haxeon/img/icon/empty_thumbnail.png";
+		
+		//データベースにアカウントを登録
+		$result = $db->query("INSERT INTO `haxeon`.`account` (`userID`, `userPass`, `userName` ,`userIcon`,`userMail`, `isEnable`, `MD5`) 
+							VALUES ( '$id', '$pass', '$id' ,'$iconPass' , '$mail' , 0 , '$hash');");
+		if ($result) {
+			$smarty->assign('isCorrect', true);
+		}
+		else {
+			error("登録処理に失敗しました。お手数ですがやり直してください。", $smarty);
+			die('INSERTクエリーが失敗しました。'.mysql_error());
+			break;
+		}
+		
+		//メールの作成
 		mb_language("japanese");
 		mb_internal_encoding("utf-8");
-		
-		//MD5ハッシュ値の生成
-		$hash = password_hash($id.$pass,PASSWORD_DEFAULT);
-		
-		//メール内容
 		$to = $mail;
 		$subject = "【Haxeon】アカウントの認証";
 		$header = "From:haxeon@citail.com";
@@ -70,6 +81,7 @@
 		if(!mb_send_mail($to, $subject, $message, $header)) {
 			//メール送信に失敗した場合
 			error("Mail Send Faild",$smarty);
+			break;
 		}
 		else {
 			$smarty->assign('isCorrect', true);
