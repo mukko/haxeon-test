@@ -34,7 +34,7 @@
         {for $i=0 to $length-1}
         <li class="followBox">
           <div class="icon">
-            <img src={$followers[$i].icon} width=50px height=50px>
+            <a href={$commonURL}profile.php?id={$followers[$i].id}><img src={$followers[$i].icon} width=50px height=50px></a>
           </div>
           <div class="name">
             <p><a href={$commonURL}profile.php?id={$followers[$i].id}>{$followers[$i].name}</a></p>
