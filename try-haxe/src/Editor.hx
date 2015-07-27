@@ -54,6 +54,9 @@ class Editor {
 	con.onData = onResult;
 	con.request(false);
 
+	var randomHash = Browser.location.hash.split("#")[1];
+	trace(randomHash);
+
     markers = [];
     lineHandles = [];
 		//CodeMirror.commands.autocomplete = autocomplete;
@@ -595,28 +598,28 @@ class Editor {
 	private function onResult(data : String) : Void {
 		//trace(data+"1");	//デバッグ
 		var userDatas = Json.parse(data);
-		
+
 		//フォークチェック
 		//if (program.userID != userDatas.userID) trace("ITS FORK !!!!!!!!!!!!");
-		
+
 		program.userID = userDatas.userID;
 		program.projectName = userDatas.projectName;
 	}
-	
+
 	private function onResult2(data : String) : Void {
 		//trace(data+"2");	//デバッグ
 		var userDatas = Json.parse(data);
-			
+
 		var con = new Http("http://localhost/haxeon/pv_count_up.php?uid="+program.userID+"&pName="+program.projectName);
 		con.request(false);
-		
+
 		//フォークチェック!!!!
 		if (program.userID != userDatas.userID) {
 			//trace("ITS FORK !!!!!!!!!!!!");
 			//フォークしたプロジェクトであることを記録
 			program.projectName = "Forked_from_"+program.projectName;
 		}
-		
+
 		program.userID = userDatas.userID;
 	}
 }
