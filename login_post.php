@@ -27,11 +27,18 @@
 	if ($result) {
 		$userID = "";
 		$userPass = "";
+		$isEnable = 0;
 		
 		while($row = $result->fetch_object()){
 			$userID   = htmlspecialchars($row->userID);
 			$userPass = htmlspecialchars($row->userPass);
 			$userName = htmlspecialchars($row->userName);
+			$isEnable = htmlspecialchars($row->isEnable);
+		}
+		
+		if ($isEnable == 0) {
+			echo "このアカウントは認証されていません！！メールをご確認下さい。";
+			exit();
 		}
 		//フォームから入力されたパスワードとDBのパスワードが一致したら成功
 		if($userPass == $pass && $userID == $id && ($id != "") && ($pass != "")){
