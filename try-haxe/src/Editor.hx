@@ -54,16 +54,12 @@ class Editor {
 	con.onData = onResult;
 	con.request(false);
 
-	var randomHash = Browser.location.hash.split("#")[1];
-	trace(randomHash);
-
     markers = [];
     lineHandles = [];
 		//CodeMirror.commands.autocomplete = autocomplete;
     CodeMirror.commands.compile = function(_) compile();
     CodeMirror.commands.togglefullscreen = toggleFullscreenSource;
 
-//怪しい部分
     HaxeLint.load();
 
   	haxeSource = CodeMirror.fromTextArea( cast new JQuery("textarea[name='hx-source']")[0] , {
@@ -604,6 +600,7 @@ class Editor {
 
 		program.userID = userDatas.userID;
 		program.projectName = userDatas.projectName;
+		new JQuery("p.proName").text(program.projectName);
 	}
 
 	private function onResult2(data : String) : Void {
@@ -621,5 +618,6 @@ class Editor {
 		}
 
 		program.userID = userDatas.userID;
+		new JQuery("p.proName").text(program.projectName);
 	}
 }

@@ -194,3 +194,8 @@ body.fullscreen-runner {
 	position: fixed;
 	z-index: 10;
 }
+
+/*追加部分*/
+.proName {
+	font-size: 30px;
+}
