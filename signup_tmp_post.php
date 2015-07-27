@@ -52,20 +52,29 @@
 				break;
 			}
 		}
-		/*
-		$result = $db->query("INSERT INTO `haxeon`.`account` (`userID`, `userPass`, `userName`, `userIcon`, `userProfile`, `userURL`,`userMail`) VALUES ( '$id', '$pass', '$name', '$filePass' , '$profile', '$url', '$mail');");
-		if ($result) {
-			//Smartyに変数登録
-			$smarty->assign('isCorrect', true);
-			$smarty->assign('userName',$id);
-			//リダイレクト
-			header("refresh:3; login_form.php");
+		
+		//取得したメールアドレス宛にメールを送信
+		mb_language("japanese");
+		mb_internal_encoding("utf-8");
+		
+		//MD5ハッシュ値の生成
+		$hash = password_hash($id.$pass,PASSWORD_DEFAULT);
+		
+		//メール内容
+		$to = $mail;
+		$subject = "【Haxeon】アカウントの認証";
+		$header = "From:haxeon@citail.com";
+		$message = "以下のURLより会員登録してください。\n"."http://localhost/haxeon/authentication.php?id=".$id."&hash=".preg_replace('/(\s|　)/','',$hash);
+		
+		//メールの送信と確認
+		if(!mb_send_mail($to, $subject, $message, $header)) {
+			//メール送信に失敗した場合
+			error("Mail Send Faild",$smarty);
 		}
 		else {
-			error("登録処理に失敗しました。お手数ですがやり直してください。", $smarty);
-			die('INSERTクエリーが失敗しました。'.mysql_error());
-		}*/
-		header("refresh:3; login_form.php");
+			$smarty->assign('isCorrect', true);
+		}
+		
 		break;
 	} 
 
