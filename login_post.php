@@ -17,8 +17,7 @@
 	
 	//データベースへの接続が失敗したらエラーを出力して終了
 	if ($db->connect_error){
-	  print("接続失敗：" . $db->connect_error . "<br>");
-	  exit();
+	  error("データベースとの接続に失敗しました。お手数ですがもう一度時間をおいてやり直して下さい。", $smarty);
 	}
 	
 	//クエリ実行
@@ -27,6 +26,7 @@
 	if ($result) {
 		$userID = "";
 		$userPass = "";
+		$userName = "";
 		$isEnable = 0;
 		
 		while($row = $result->fetch_object()){
@@ -36,9 +36,8 @@
 			$isEnable = htmlspecialchars($row->isEnable);
 		}
 		
-		if ($isEnable == 0) {
-			echo "このアカウントは認証されていません！！メールをご確認下さい。";
-			exit();
+		if ($userName != "" && $isEnable == 0) {
+			error("このアカウントは認証が完了していません。認証メールをご確認下さい。", $smarty);
 		}
 		//フォームから入力されたパスワードとDBのパスワードが一致したら成功
 		if($userPass == $pass && $userID == $id && ($id != "") && ($pass != "")){
@@ -54,16 +53,23 @@
 			//リダイレクト
 			header("refresh:2; index.php");
 		} else {
-			$smarty->assign('isLogin', false);
-			$smarty->assign('preLink', $_SERVER['HTTP_REFERER']);
+			error("IDかパスワードが間違っています。もう一度入力してください。", $smarty);
 		}
 	}
 	else {
-		$smarty->assign('isLogin', false);
-		$smarty->assign('preLink', $_SERVER['HTTP_REFERER']);
+		error("クエリの実行に失敗しました。入力エラーです。", $smarty);
 	}
 
 	$db->close();
 	
 	$smarty->display('login_post.tpl');
-?>
+	
+	
+//エラー出力関数
+function error($errorMsg, $smarty) {
+	$smarty->assign('errorMsg', $errorMsg);
+	$smarty->assign('isLogin', false);
+	$smarty->assign('preLink', $_SERVER['HTTP_REFERER']);
+	$smarty->display('login_post.tpl');
+	exit();
+}
