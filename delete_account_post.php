@@ -40,6 +40,7 @@
 	if ($pass == $db_pass) {
 		//クエリ実行
 		$db->query("DELETE FROM `account` WHERE `userID` = '$uid'");		//アカウント情報の削除
+		$db->query("DELETE FROM `project` WHERE `ownerUserID` = '$uid'");	//所持プロジェクトの削除
 		//セッション変数を全て解除する
 		$_SESSION = array();
 		//セッションを切断するにはセッションクッキーも削除する。
