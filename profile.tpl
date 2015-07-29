@@ -66,6 +66,8 @@
         </div>
       </div>
     </div>
+	
+	<input type="button" style="background-color:red;" onclick="location.href='delete_account_form.php'"value="アカウント削除"></input>
     {include file="footer.tpl"}
   </div>
 </font>

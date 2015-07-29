@@ -75,7 +75,7 @@
 		$to = $mail;
 		$subject = "【Haxeon】アカウントの認証";
 		$header = "From:haxeon@citail.com";
-		$message = "以下のURLより会員登録してください。\n"."http://localhost/haxeon/authentication.php?hash=".preg_replace('/(\s|　)/','',$hash)."&id=".$id."";
+		$message = "以下のURLより認証を完了してください。\n"."http://localhost/haxeon/authentication.php?hash=".preg_replace('/(\s|　)/','',$hash)."&id=".$id."";
 		
 		//メールの送信と確認
 		if(!mb_send_mail($to, $subject, $message, $header)) {
