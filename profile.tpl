@@ -49,7 +49,11 @@
           {$userProfile}
           {/if}
         </div>
-      </div>
+	
+		<a Href="http://localhost/haxeon/update_account_form.php">プロフィール更新</a>
+		<input type="button" style="background-color:red;" onclick="location.href='delete_account_form.php'"value="アカウント削除"></input>
+      
+		</div>
       <div class="contents">
         <div class="projects">
           <div class="head"><p>Projects</p></div>
@@ -66,8 +70,6 @@
         </div>
       </div>
     </div>
-	
-	<input type="button" style="background-color:red;" onclick="location.href='delete_account_form.php'"value="アカウント削除"></input>
     {include file="footer.tpl"}
   </div>
 </font>
