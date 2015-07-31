@@ -4,7 +4,7 @@
 	
 	//Smartyオブジェクト作成
 	$smarty = new Smarty();
-	//$smarty->assign('uid', $_SESSION['userID']);
+	$id = $_SESSION['userID'];
 	
 	//データベース接続処理
 	$dbName = 'haxeon';
@@ -35,7 +35,17 @@
 			$smarty->assign('userURL', $userURL);
 		}
 	}
-
+	
+	if (isset($_GET['userName']) && isset($_GET['userProfile']) && isset($_GET['userURL'])) {
+		$userName = $_GET['userName'];
+		$userProfile = $_GET['userProfile'];
+		$userURL = $_GET['userURL'];
+		
+		$smarty->assign('userName', $userName);
+		$smarty->assign('userProfile', $userProfile);
+		$smarty->assign('userURL', $userURL);
+	}
+	
 	$db->close();
 	
 	//ページを表示する

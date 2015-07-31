@@ -43,7 +43,12 @@
 		}
 		
 		//パスワードが入力されていた場合の処理
-		if(strlen($pass) != 0 && strlen($pass2) != 0) {
+		if (strlen($currentPass) != 0 ||strlen($pass) != 0 || strlen($pass2) != 0) {
+			//既存パスワードが合っているかチェック
+			if ($currentPass != $db_userID) {
+				error("パスワードが一致しません。", $smarty);
+				break;
+			}
 			//既存パスワードとのチェック
 			if ($pass == $currentPass || $pass2 == $currentPass) {
 				error("既存のパスワードと同じパスワードは設定できません。", $smarty);
@@ -93,8 +98,6 @@
 			//Smartyに変数登録
 			$smarty->assign('isCorrect', true);
 			$smarty->assign('userName',$id);
-			//リダイレクト
-			//header("refresh:3; profile.php?id='$userID'");
 		}
 		else {
 			error("登録処理に失敗しました。お手数ですがやり直してください。", $smarty);
@@ -111,6 +114,8 @@
 //エラー出力関数
 function error($errorMsg, $smarty) {
 	$smarty->assign('errorMassage', $errorMsg);
-	$smarty->assign('preLink', $_SERVER['HTTP_REFERER']);
 	$smarty->assign('isCorrect', false);
+	$smarty->assign('userName', $_POST['userName']);
+	$smarty->assign('userProfile', $_POST['userProfile']);
+	$smarty->assign('userURL', $_POST['userURL']);
 }
