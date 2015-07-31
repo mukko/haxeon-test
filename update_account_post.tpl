@@ -7,8 +7,8 @@
 	<!-- 正しい情報が入力された場合　-->
 	{if $isCorrect}
 		こんにちは、{$userName}さん。<br>
-		アカウント情報を登録しました。<br>
-		ログイン画面に移動します。
+		アカウント情報を更新しました。<br>
+		<a href="http://localhost/haxeon/profile.php?id={$userName}" >Go Profile Page</a>
 		
 	<!-- 誤った内容が入力された場合　-->
 	{else}

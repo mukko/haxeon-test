@@ -4,7 +4,7 @@
 	
 	//Smartyオブジェクト作成
 	$smarty = new Smarty();
-	$smarty->assign('uid', $_SESSION['userID']);
+	//$smarty->assign('uid', $_SESSION['userID']);
 	
 	//データベース接続処理
 	$dbName = 'haxeon';
@@ -19,7 +19,7 @@
 	}
 	
 	//既存IDとの重複チェック
-	$result = $db->query("SELECT * FROM `account` WHERE `userID`= \"".$id."\"");
+	$result = $db->query("SELECT * FROM `account` WHERE `userID`= '$id'");
 	if ($result) {
 		while ($row = $result->fetch_object()) {
 			$userID = htmlspecialchars($row->userID);
@@ -28,8 +28,9 @@
 			$userProfile = htmlspecialchars($row->userProfile);
 			$userURL = htmlspecialchars($row->userURL);
 		
+			$smarty->assign('userID', $userID);
 			$smarty->assign('userName', $userName);
-			//$smarty->assign('userIcon', $userIcon);
+			$smarty->assign('userIcon', $userIcon);
 			$smarty->assign('userProfile', $userProfile);
 			$smarty->assign('userURL', $userURL);
 		}

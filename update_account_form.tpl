@@ -1,12 +1,12 @@
 <html>
 	<head><title>プロフィール編集</title></head>
 
-	<p>更新する項目を入力してください。<br>更新しない項目は空欄のまま保存して下さい。</p><br>
+	<p>更新する項目を入力してください。</p><br>
 
-	<form action="signup_post.php" method="post" enctype="multipart/form-data">
+	<form action="update_account_post.php" method="post" enctype="multipart/form-data">
 		<center>
 			<tr>ユーザーID(変更不可)<br>
-			<INPUT size="20" type="text" value={$uid} disabled="disabled" name="userID"></INPUT><br></tr>
+			<INPUT size="20" type="text" value={$userID} name="userID" disabled="disabled" ></INPUT><br></tr>
 			<br>
 			<tr>現在のパスワード<br>
 			<INPUT size="20" type="password" value="" name="currentPass"></INPUT><br></tr>
@@ -18,9 +18,10 @@
 			<tr>ユーザー表示名<br>
 			<INPUT size="20" type="text" value={$userName} name="userName"></INPUT><br></tr><br>
 			<tr>アイコン<br>
+			<img src={$userIcon} width="50px" height="50px"/><br>
 			<INPUT type="file" name="userIcon"></INPUT><br></tr><br>
 			<tr>プロフィール<br>
-			<TEXTAREA rows="5" cols="40" type="text" value={$userProfile} name="userProfile"></TEXTAREA><br></tr>
+			<TEXTAREA rows="5" cols="40" type="text" value="" name="userProfile">{$userProfile}</TEXTAREA><br></tr>
 			<br>
 			<tr>URL<br>
 			<INPUT size="50" type="url" name="userURL" value={$userURL}></INPUT><br></tr>

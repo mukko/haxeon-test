@@ -6,7 +6,7 @@
 	$smarty = new Smarty();
 
 	//サインアップフォームからの情報取得
-	$id = $_POST['userID'];
+	$id = $_SESSION['userID'];
 	$currentPass = $_POST['currentPass'];
 	$pass  = $_POST['userPass'];
 	$pass2 = $_POST['userPass2'];
@@ -19,7 +19,11 @@
 	$user = 'root';
 	$password = 'DELL';
 	$db = new mysqli('localhost', $user , $password, $dbName) or die("error");
-
+	
+	$db_userID = "";
+	$db_userPass = "";
+	$db_userName = "";
+	
 	//データベースへの接続が失敗したらエラーを出力して終了
 	if ($db->connect_error){
 	  print("接続失敗：" . $db->connect_error . "<br>");
@@ -28,33 +32,45 @@
 
 	//入力内容チェック処理
 	while (true) {
-		//IDの文字数チェック
-		if (strlen($id) < 4) {
-			error("IDが短すぎます。4文字以上で登録して下さい。", $smarty);
-			break;
-		}
-		//既存IDとの重複チェック
-		$result = $db->query("SELECT * FROM `account` WHERE `userID`= \"".$id."\"");
+		//データベースから情報を取得
+		$result = $db->query("SELECT * FROM `account` WHERE `userID`= '$id'");
 		if ($result) {
-			$db_id = "";
 			while ($row = $result->fetch_object()) {
-				$db_id = htmlspecialchars($row->userID);
+				$db_userID = htmlspecialchars($row->userID);
+				$db_userPass =  htmlspecialchars($row->userPass);
+				$db_userName =  htmlspecialchars($row->userName);
 			}
-			if ($db_id == $id) {
-				error("入力されたIDは既に使用されています。別のIDを入力して下さい。", $smarty);
+		}
+		
+		//パスワードが入力されていた場合の処理
+		if(strlen($pass) != 0 && strlen($pass2) != 0) {
+			//既存パスワードとのチェック
+			if ($pass == $currentPass || $pass2 == $currentPass) {
+				error("既存のパスワードと同じパスワードは設定できません。", $smarty);
 				break;
 			}
+			//パスワードの不一致チェック
+			if ($pass != $pass2) {
+				error("新しいパスワードが一致しません。2つの同じパスワードを入力してください。", $smarty);
+				break;
+			}
+			//パスワードの文字数チェック
+			if (strlen($pass) < 4 && strlen($pass2) < 4) {
+				error("パスワードは4文字以上で入力してください。", $smarty);
+				break;
+			}
+			$db_userPass = $pass;
 		}
-		//パスワードの不一致チェック
-		if ($pass != $pass2) {
-			error("パスワードが一致しません。2つの同じパスワードを入力してください。", $smarty);
-			break;
+		
+		//ユーザー名が空欄かどうかをチェック
+		if (strlen($name) == 0) {
+			error("ユーザー名を入力してください。", $smarty);
+			break;	
 		}
-		//パスワードの文字数チェック
-		if (strlen($pass) < 4 || strlen($pass2) < 4 ) {
-			error("パスワードは4文字以上で入力してください。", $smarty);
-			break;
+		else {
+			$db_userName = $name;
 		}
+		
 		//アイコン画像のチェック
 		if (strlen($_FILES["userIcon"]["name"]) == 0 ) {
 			$filePass = "img/icon/empty_thumbnail.png";
@@ -70,14 +86,15 @@
 				break;
 			}
 		}
-
-		$result = $db->query("INSERT INTO `haxeon`.`account` (`userID`, `userPass`, `userName`, `userIcon`, `userProfile`, `userURL`,`userMail`) VALUES ( '$id', '$pass', '$name', '$filePass' , '$profile', '$url', '$mail');");
+		
+		$result = $db->query("UPDATE `account` SET `userPass`='$db_userPass' , `userName`='$db_userName' , 
+			`userIcon`='$filePass',`userProfile`='$profile', `userURL`='$url' WHERE `userID` = '$id'");
 		if ($result) {
 			//Smartyに変数登録
 			$smarty->assign('isCorrect', true);
 			$smarty->assign('userName',$id);
 			//リダイレクト
-			header("refresh:3; login_form.php");
+			//header("refresh:3; profile.php?id='$userID'");
 		}
 		else {
 			error("登録処理に失敗しました。お手数ですがやり直してください。", $smarty);
