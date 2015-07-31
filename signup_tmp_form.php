@@ -28,5 +28,5 @@
 	);
 	
 	//ページを表示する
-	$smarty->display('signup_common.tpl');
+	$smarty->display('signup_tmp_form.tpl');
 ?>
