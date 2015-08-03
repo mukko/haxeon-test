@@ -1,48 +1,39 @@
 <?php
-	//スマーティを使用
-	require_once('Smarty.class.php');
-	$smarty = new Smarty();
-
-	//共通部分のURL登録
-	$smarty->assign('commonURL', 'http://localhost/haxeon/');
-
-	//DBへの接続処理
-	$dbName 	= 'haxeon';
-	$user		= 'root';
-	$password 	= 'DELL';
-
-	$db = new mysqli('localhost', $user ,$password, $dbName) or die("error");
-	if ($db->connect_error){
-	  print("connection error" . $db->connect_error . "<br>");
-	  exit();
+	require("AssignSmarty.php");
+	require("connectDB.php");
+	
+	$smartyArgs[] = array();
+	array_push($smartyArgs, "commonURL", "http://localhost/haxeon/");
+	
+	try {
+		$cDB = new ConnectDB();
+		$db = $cDB->getDB();
+	} catch (Exception $e) {
+		echo($e);
+		exit();
 	}
 
-	//未ログイン時の処理
-	if (!isset($_COOKIE["PHPSESSID"])) {
-		//スマーティのログイン情報の判定変数を設定
-		$smarty->assign('isLogin', false);
-	}
 	//ログイン時はアイコンURLを取得する
-	else {
+	if (isset($_COOKIE["PHPSESSID"])){
 		//セッションがアクティブでない場合はセッションを起動する
 		if (!(session_status() == PHP_SESSION_ACTIVE)) {
 			session_start();
 		}
 		
-		$id = $_SESSION['userID'];
-		$smarty->assign('id',$id);
-		$smarty->assign('isLogin', true);
-		$result =  $db->query("SELECT * FROM `account` WHERE `userID` = \"".$id."\"");
-
+		array_push($smartyArgs, "id", $_SESSION['userID']);
+		array_push($smartyArgs, "isLogin", true);
+		
+		$result =  $db->query("SELECT * FROM `account` WHERE `userID` = \"".$_SESSION['userID']."\"");
+		
 		if($result){
 			while($row = $result->fetch_object()){
-				$icon = htmlspecialchars($row->userIcon);
-				$name = htmlspecialchars($row->userName);
-				$smarty->assign('iconURL',$icon);
-				$smarty->assign('userName', $name);
+				array_push($smartyArgs ,"iconURL", htmlspecialchars($row->userIcon));
+				array_push($smartyArgs ,"userName", htmlspecialchars($row->userName));
 			}
 		}
 	}
-
-	$smarty->display('common.tpl');
-?>
+	else {
+		array_push($smartyArgs, "isLogin", false);
+	}
+	
+	new AssignSmarty("common.php","common.tpl",$smartyArgs);
