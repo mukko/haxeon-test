@@ -1,8 +1,8 @@
 <?php
-	require("AssignSmarty.php");
+	include_once("AssignSmarty.php");
+	include_once("common.php");
 	
 	//セッションからログイン中のユーザーIDを取得
-	session_start();
 	$userID = $_SESSION['userID'];
 	
-	new AssignSmarty("common.php", "delete_account_form.tpl", "userID", $userID);
+	new AssignSmarty("delete_account_form.tpl", Array("userID", $userID));

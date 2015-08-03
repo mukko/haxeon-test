@@ -1,8 +1,8 @@
 <?php
-	require("AssignSmarty.php");
-	require("connectDB.php");
+	include_once("AssignSmarty.php");
+	include_once("connectDB.php");
 	
-	$smartyArgs[] = array();
+	$smartyArgs = array();
 	array_push($smartyArgs, "commonURL", "http://localhost/haxeon/");
 	
 	try {
@@ -36,4 +36,4 @@
 		array_push($smartyArgs, "isLogin", false);
 	}
 	
-	new AssignSmarty("common.php","common.tpl",$smartyArgs);
+	new AssignSmarty("common.tpl",$smartyArgs);
