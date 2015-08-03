@@ -24,11 +24,14 @@
 	}
 	//ログイン時はアイコンURLを取得する
 	else {
-		//session_start();
+		//セッションがアクティブでない場合はセッションを起動する
+		if (!(session_status() == PHP_SESSION_ACTIVE)) {
+			session_start();
+		}
+		
 		$id = $_SESSION['userID'];
 		$smarty->assign('id',$id);
 		$smarty->assign('isLogin', true);
-		// $smarty->assign('userName', $name);
 		$result =  $db->query("SELECT * FROM `account` WHERE `userID` = \"".$id."\"");
 
 		if($result){
