@@ -3,9 +3,17 @@
 
   require_once('Smarty.class.php');
   $smarty = new Smarty();
-
-  //ユーザー情報を取得
-  //$uid = $_SESSION['userID'];
+  
+  //ログインしていなかったらログインページへ遷移させる。
+  if (!isset($_SESSION['userID'])) {
+	$smarty->assign('errorMsg', "ログインして下さい。");
+	$smarty->assign('isLogin', false);
+	$smarty->assign('preLink', "http://localhost/haxeon/login_form.php");
+	$smarty->display('login_post.tpl');
+	exit();
+  }
+  
+  
   $uid;
   if(isset($_GET['id'])){
     $uid = $_GET['id'];
