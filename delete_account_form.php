@@ -1,15 +1,8 @@
 <?php
-	include("common.php");
-
-	require_once('Smarty.class.php');
-	$smarty = new Smarty();
-
-	//ユーザー情報を取得
-	$uid;
-	if(isset($_SESSION['userID'])){
-	$uid = $_SESSION['userID'];
-	}
+	require("AssignSmarty.php");
 	
-	$smarty->assign('userID', $uid);
+	//セッションからログイン中のユーザーIDを取得
+	session_start();
+	$userID = $_SESSION['userID'];
 	
-	$smarty->display('delete_account_form.tpl');
+	new AssignSmarty("common.php", "delete_account_form.tpl", "userID", $userID);

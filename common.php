@@ -24,7 +24,7 @@
 	}
 	//ログイン時はアイコンURLを取得する
 	else {
-		session_start();
+		//session_start();
 		$id = $_SESSION['userID'];
 		$smarty->assign('id',$id);
 		$smarty->assign('isLogin', true);
