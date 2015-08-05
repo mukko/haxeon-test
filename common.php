@@ -20,8 +20,7 @@
 			session_start();
 		}
 		
-		array_push($smartyArgs, "id", $_SESSION['userID']);
-		array_push($smartyArgs, "isLogin", true);
+		array_push($smartyArgs, "id", $_SESSION['userID'], "isLogin", true);
 		
 		$result =  $db->query("SELECT * FROM `account` WHERE `userID` = \"".$_SESSION['userID']."\"");
 		

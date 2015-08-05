@@ -375,9 +375,12 @@ class Compiler {
 				for (row in rset) {
 					html.body.push("プロジェクトID : "+row.projectID+" , 所有者 : "+userID+" , プロジェクト名 : "+projectName);
 				}
-				cnx.request("UPDATE project SET projectID = \""+program.uid+"\", url = \"http://localhost/haxeon/try-haxe/index.html#"+program.uid+"\" WHERE ownerUserID = '" + userID + "' AND projectName = '" + projectName+"';");
+				cnx.request("UPDATE project SET projectID = \""+program.uid+"\",modified = \""+Date.now().toString()+"\" , url = \"http://localhost/haxeon/try-haxe/index.html#"+program.uid+"\" WHERE ownerUserID = '" + userID + "' AND projectName = '" + projectName+"';");
 			}
-
+			
+			//日付取得
+			//html.body.push(Date.now().toString());	//デバッグ
+			
 			cnx.close();
 		}
 
