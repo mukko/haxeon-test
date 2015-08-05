@@ -80,7 +80,7 @@
 				</p>
 				<div class="pv">{$projects[$i].pv} pv</div>
                 {if  $userID==$uid}
-                <div class="edit"><a href="projectSettings.php?pid={$projects[$i].id}">設定</a></div>
+                <div class="edit"><a href="http://localhost/haxeon/projectSettings.php?pid={$projects[$i].id}">設定</a></div>
                 {/if}
 				</div>
 			{/for}

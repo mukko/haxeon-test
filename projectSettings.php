@@ -10,9 +10,9 @@ $smarty = new Smarty();
 
 //プロジェクトIDを取得
 $pid;
-
 if(isset($_GET['pid'])){
-    $uid = $_GET['pid'];
+    $pid = $_GET['pid'];
+    $smarty->assign('pid', $pid);
 }else{
     exit();
 }
@@ -20,7 +20,7 @@ if(isset($_GET['pid'])){
 //他人が設定変更できないよう、セッションIDとプロジェクト作成者の比較
 if (isset($_SESSION['userID'])) {
     $sessionID = $_SESSION['userID'];
-    $result = $db->query('SELECT ownerUserID FROM project WHERE projectID = $pid');
+    $result = $db->query("SELECT ownerUserID FROM project WHERE projectID = $pid");
     if($result){
         $row = $result->fetch_object();
         $ownerUserID = htmlspecialchars($row);
