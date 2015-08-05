@@ -5,7 +5,7 @@
 	<font face="ヒラギノ角ゴ Pro W3","メイリオ">
 
 	<!-- 認証が成功した場合　-->
-	{if $isEnable}
+	{if $isSuccess}
 		<font size="70" face="メイリオ">
 			認証が成功しました!!<br>
 			ログイン画面に移動します。

@@ -6,15 +6,14 @@
 
 	<!-- 正しい情報が入力された場合　-->
 	{if $isCorrect}
-		こんにちは、{$userName}さん。<br>
-		アカウント情報を登録しました。<br>
-		ログイン画面に移動します。
+		アカウント情報を更新しました。<br>
+		<a href="http://localhost/haxeon/profile.php?id={$userName}" >Go Profile Page</a>
 		
 	<!-- 誤った内容が入力された場合　-->
 	{else}
-		<font size="70" face="HGP創英角ﾎﾟｯﾌﾟ体">{$errorMassage}</font>
+		<font size="70">{$errorMassage}</font>
 		<p>入力内容に誤りがあります。もう一度入力してください。</p>
-		<a href={$preLink}>戻る</a>
+		<a href="http://localhost/haxeon/update_account_form.php?userName={$userName}&userProfile={$userProfile}&userURL={$userURL}" >Go Profile Page</a>
 	{/if}
 	
 	</font>
