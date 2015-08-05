@@ -68,7 +68,7 @@
 
 		</div>
 		<!-- プロフィール情報表示部分終了 -->
-		
+
 		<!-- 所持プロジェクト一覧 -->
 		<div class="contents">
 		<div class="projects">
@@ -78,9 +78,10 @@
 				<p class="title">
 				<a href={$projects[$i].url} title={$projects[$i].name}>{$projects[$i].name}</a>
 				</p>
-				<div class="pv">{$projects[$i].pv}</div>
+				<div class="pv">{$projects[$i].pv} pv</div>
                 {if  $userID==$uid}
-                <div class="edit"><a href="projectEdit.php?pid={$projects[$i].id}">設定</a></div>
+                <div class="edit"><a href="projectSettings.php?pid={$projects[$i].id}">設定</a></div>
+                {/if}
 				</div>
 			{/for}
 		</div>
