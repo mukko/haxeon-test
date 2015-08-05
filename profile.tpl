@@ -59,14 +59,17 @@
               <p class="title">
                 <a href={$projects[$i].url} title={$projects[$i].name}>{$projects[$i].name}</a>
               </p>
-              <span class="pv">{$projects[$i].pv}</span>
+              <div class="pv">{$projects[$i].pv} pv</div>
+              {if  $userID==$uid}
+              <div class="edit"><a href="projectEdit.php?pid={$projects[$i].id}">設定</a></div>
+              {/if}
             </div>
             {/for}
           </div>
         </div>
       </div>
     </div>
-	
+
 	<input type="button" style="background-color:red;" onclick="location.href='delete_account_form.php'"value="アカウント削除"></input>
     {include file="footer.tpl"}
   </div>
