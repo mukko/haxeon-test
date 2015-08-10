@@ -5,15 +5,15 @@
 	<div class="main">
 		<div class="hotcode">
 			<font size="10">Hot Codes</font>
-
+			
 			<div class="projectContainer">
 				{for $i=0 to $proNum-1}
 				<!-- 表示するプロジェクトランキングは5個まで -->
 				{if {$i} == 30} {break} {/if}
-
+				
 				<!-- プロジェクト情報表示 -->
 				<div class="project">
-					第 {$i+1} 位
+					第 {$top+$i+1} 位
 					<div class="proName">
 						<a href={$var[$i].url}> {$var[$i].proName} </a>
 					</div>

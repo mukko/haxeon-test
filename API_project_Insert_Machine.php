@@ -8,16 +8,17 @@
 	$i = 0;
 	while ($i < 10000) {
 		$proID = makeRandStr();
-		$proName = "project".makeRandStr();
+		$proName = makeRandStr();
 		$userID = "user".$i;
-		$pv = mt_rand();
-		$proURL = "localhost/haxeon/try-haxe/tmp/".makeRandStr();
+		//$pv = mt_rand();
+		$pv = $i;
+		$proURL = "http://localhost/haxeon/try-haxe/index.html#".$proName;
 		
 		//データベースにアカウントを登録
 		$result = $db->query("INSERT INTO `haxeon`.`project` (`projectID`, `projectName`, `ownerUserID` ,`pv`,`url`) 
 			VALUES ( '$proID', '$proName', '$userID' , $pv , '$proURL');");
 		$i++;
-		echo $i."</br>";
+		//echo $i."</br>";
 	}
 	
 	$db->close();
