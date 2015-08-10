@@ -4,9 +4,11 @@
 	require_once('Smarty.class.php');
 	$smarty = new Smarty();
 	
+	$num_project = 30;	//表示するプロジェクトの数
+	
 	$days = "day";
 	$order = "pv";
-	$page = 1;
+	$page = 667;
 	
 	if (isset($_GET['days'])) {
 		$days = $_GET['days'];
@@ -27,15 +29,21 @@
 		case "all":  $beginDate = date("Y-m-d H:i:s",strtotime("-365 days"));
 		default :    $beginDate = date("Y-m-d H:i:s",strtotime("-1 days"));
 	}
+	$smarty->assign('days', $days);
 	
 	//ランキングページ数
-	$end = $page * 30;
-	$top = $end  - 30;
+	$end = $page * $num_project;
+	$top = $end  - $num_project;
 	$smarty->assign('top', $top);
 	
 	//要素数をカウント
 	$result = $db->query("SELECT COUNT(*) as cnt FROM project WHERE project.modified BETWEEN '$beginDate' AND '$endDate'");
 	$cnt = $result->fetch_object()->cnt;
+	
+	//ページ数の保持
+	$max_page = ceil($cnt / $num_project);
+	$smarty->assign('page', $page);
+	$smarty->assign('maxPage', $max_page);
 	
 	//ホットコードを表示
 	$result = $db->query("
