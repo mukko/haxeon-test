@@ -24,10 +24,12 @@
 			{for $i=$page-2 to $page+2}
 				{if {$i} == {$maxPage}} {break} {/if}	<!--最後のページにになったらループを抜ける-->
 				
-				{if {$i} == {$page}}
-					{$i} <!-- 現在表示しているページへのリンクは表示させない-->
-				{else}
-					<a href="http://localhost/haxeon/index.php?order=pv&page={$i}&days={$days}">{$i}</a>
+				{if {$i} != -1 && {$i} != 0}
+					{if {$i} == {$page}}
+						{$i} <!-- 現在表示しているページへのリンクは表示させない-->
+					{else}
+						<a href="http://localhost/haxeon/index.php?order=pv&page={$i}&days={$days}">{$i}</a>
+					{/if}
 				{/if}
 			{/for}
 			
