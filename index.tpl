@@ -18,7 +18,7 @@
 						<a href={$var[$i].url}> {$var[$i].proName} </a>
 					</div>
 					<div class="userName">
-						author:	<a href="profile.php?id={$var[$i].userID}">{$var[$i].userName}</a>
+						author:	<a href="profile.php?id={$var[$i].userID}">@{$var[$i].userID}</a>
 					</div>
 					<div class-"pv">
 						{$var[$i].pv} view

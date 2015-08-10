@@ -35,21 +35,11 @@
 			$userID = htmlspecialchars($row->ownerUserID);
 			$pv = htmlspecialchars($row->pv);
 			$url = htmlspecialchars($row->url);
-
-			//projectテーブルのuserIDをつかって、accountテーブルからuserNameを取得する
-			$accountdata = $db->query("SELECT * FROM `ACCOUNT` WHERE userID = \"".$userID."\"");
-			$userName;
-			if($accountdata){
-				while($row = $accountdata->fetch_object()) {
-						$userName = htmlspecialchars($row->userName);
-				}
-			}
-
+			
 			$obj = array(
 				'proID' => $proID,
 				'proName' => $proName,
 				'userID' => $userID,
-				'userName' => $userName,
 				'pv' => $pv,
 				'url' => $url,
 			);
@@ -63,4 +53,3 @@
 	$db->close();
 
 	$smarty->display('index.tpl');
-?>
